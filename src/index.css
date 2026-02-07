@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-orange: #FF6B35;
+    --dark-bg: #000000;
+    --light-bg: #FFFFFF;
+    --light-gray: #F8F9FA;
+    --text-dark: #1A1A1A;
+    --text-light: #FFFFFF;
+    --accent-gray: #6B7280;
+    --border-color: #E5E7EB;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased text-text-dark bg-light;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-8 py-3 rounded-md font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95;
+  }
+
+  .section-padding {
+    @apply py-[120px] px-6 md:px-12 lg:px-24;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    @apply py-[60px] px-6;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
