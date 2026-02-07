@@ -13,7 +13,7 @@ const Hero: React.FC = memo(() => {
     const { ref: heroRef, isInViewport } = useInViewPort<HTMLElement>();
 
     // Generate static random values once (not on every render)
-    const sparkles = React.useMemo(() => 
+    const sparkles = React.useMemo(() =>
         [...Array(8)].map((_, i) => ({
             id: i,
             width: Math.random() * 3 + 2,
@@ -160,7 +160,7 @@ const Hero: React.FC = memo(() => {
                     <a href="#capabilities">
                         <Button
                             variant="primary"
-                            className="px-2 sm:px-12 py-1 sm:py-5 rounded-md sm:rounded-2xl md:font-black font-semibold text-[10px]"
+                            className="px-2 sm:px-12 py-1 sm:py-5 rounded-md sm:rounded-2xl md:font-black font-semibold text-[10px] md:text-lg"
                         >
                             Explore Capabilities
                         </Button>
