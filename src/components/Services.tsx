@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo, useCallback } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from './common/Button';
@@ -28,7 +28,7 @@ const capabilities = [
     }
 ];
 
-const CapabilitiesSection: React.FC = () => {
+const CapabilitiesSection: React.FC = memo(() => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -39,7 +39,7 @@ const CapabilitiesSection: React.FC = () => {
             setIsMobile(window.innerWidth < 640);
         };
         checkMobile();
-        window.addEventListener('resize', checkMobile);
+        window.addEventListener('resize', checkMobile, { passive: true });
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
@@ -48,17 +48,17 @@ const CapabilitiesSection: React.FC = () => {
         if (!isMobile) return;
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % capabilities.length);
-        }, 4000);
+        }, 5000); // Increased from 4000 to reduce CPU usage
         return () => clearInterval(interval);
     }, [isMobile]);
 
-    const nextSlide = () => {
+    const nextSlide = useCallback(() => {
         setCurrentSlide((prev) => (prev + 1) % capabilities.length);
-    };
+    }, []);
 
-    const prevSlide = () => {
+    const prevSlide = useCallback(() => {
         setCurrentSlide((prev) => (prev - 1 + capabilities.length) % capabilities.length);
-    };
+    }, []);
 
     const cap = capabilities[currentSlide];
 
@@ -77,40 +77,40 @@ const CapabilitiesSection: React.FC = () => {
                 </h2>
             </div>
 
-            {/* Mobile Carousel View */}
+            {/* Mobile Carousel View - Optimized */}
             <div className="sm:hidden relative max-w-[400px] mx-auto px-4">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentSlide}
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -50 }}
-                        transition={{ duration: 0.3 }}
-                        className="relative h-[320px] rounded-[1.5rem] overflow-hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }} // Reduced duration
+                        className="relative h-[320px] rounded-[1.5rem] overflow-hidden will-change-transform"
+                        style={{ transform: 'translateZ(0)' }}
                     >
-                        {/* Background Image */}
                         <div className="absolute inset-0">
                             <img
                                 src={cap.image}
                                 alt={cap.title}
                                 className="w-full h-full object-cover"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </div>
 
-                        {/* Dark Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
 
-                        {/* Content */}
                         <div className="absolute inset-0 z-20 p-5 flex flex-col justify-end">
-                            <h3 className="font-montserrat text-base font-bold text-white leading-tight mb-2">
+                            <h3 className="font-montserrat text-lg font-bold text-white leading-tight mb-2">
                                 {cap.title}
                             </h3>
-                            <p className="font-normal text-[11px] text-white/80 leading-relaxed line-clamp-2 mb-3">
+                            <p className="font-normal text-xs text-white/80 leading-relaxed line-clamp-2 mb-3">
                                 {cap.shortDesc}
                             </p>
                             <Button
                                 variant="primary"
-                                className="w-full py-2 px-4 rounded-lg font-semibold text-[10px]"
+                                className="w-full py-2.5 rounded-lg font-semibold text-xs"
                             >
                                 View Details
                             </Button>
@@ -118,7 +118,6 @@ const CapabilitiesSection: React.FC = () => {
                     </motion.div>
                 </AnimatePresence>
 
-                {/* Navigation Arrows */}
                 <button
                     onClick={prevSlide}
                     className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-lg z-30"
@@ -132,7 +131,6 @@ const CapabilitiesSection: React.FC = () => {
                     <ChevronRight size={18} className="text-black" />
                 </button>
 
-                {/* Dots Indicator */}
                 <div className="flex justify-center gap-2 mt-4">
                     {capabilities.map((_, idx) => (
                         <button
@@ -146,73 +144,72 @@ const CapabilitiesSection: React.FC = () => {
                 </div>
             </div>
 
-            {/* Desktop Grid View */}
+            {/* Desktop Grid View - Optimized with will-change */}
             <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-[1400px] mx-auto px-4 sm:px-6">
                 {capabilities.map((cap, index) => (
-                    <motion.div
+                    <div
                         key={index}
-                        onHoverStart={() => setHoveredIndex(index)}
-                        onHoverEnd={() => setHoveredIndex(null)}
+                        onMouseEnter={() => setHoveredIndex(index)}
+                        onMouseLeave={() => setHoveredIndex(null)}
                         onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-                        className="relative h-[400px] sm:h-[500px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden group cursor-pointer"
+                        className="relative h-[400px] sm:h-[500px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden group cursor-pointer will-change-transform"
+                        style={{ transform: 'translateZ(0)' }}
                     >
-                        {/* Background Image */}
-                        <div className="absolute inset-0 transition-transform duration-700">
+                        {/* Background Image with GPU acceleration */}
+                        <div className="absolute inset-0 transition-transform duration-700 will-change-transform">
                             <img
                                 src={cap.image}
                                 alt={cap.title}
-                                className={`w-full h-full object-cover transition-transform duration-700 ${(hoveredIndex === index || expandedIndex === index) ? 'scale-110' : 'scale-100'}`}
+                                className={`w-full h-full object-cover transition-transform duration-700 will-change-transform ${
+                                    (hoveredIndex === index || expandedIndex === index) ? 'scale-110' : 'scale-100'
+                                }`}
+                                loading="lazy"
+                                decoding="async"
                             />
                         </div>
 
-                        {/* Dark Gradient Overlay - Stronger at bottom */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
 
-                        {/* Content Container */}
                         <div className="absolute inset-0 z-20 p-5 sm:p-8 flex flex-col justify-end">
-                            {/* Title - Always visible */}
                             <h3 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight mb-2 sm:mb-3">
                                 {cap.title}
                             </h3>
 
-                            {/* Description with smooth expand animation */}
                             <div className="overflow-hidden transition-all duration-500 ease-out mb-3 sm:mb-4 md:mb-6">
-                                <motion.div
-                                    initial={false}
-                                    animate={{
-                                        height: (hoveredIndex === index || expandedIndex === index) ? 'auto' : 24,
-                                        opacity: 1
-                                    }}
-                                    transition={{
-                                        duration: 0.5,
-                                        ease: [0.4, 0, 0.2, 1]
-                                    }}
+                                <div
                                     className="mb-2 sm:mb-4"
+                                    style={{
+                                        height: (hoveredIndex === index || expandedIndex === index) ? 'auto' : '24px',
+                                    }}
                                 >
-                                    <p className={`font-normal text-xs sm:text-sm leading-relaxed transition-colors duration-500 ${(hoveredIndex === index || expandedIndex === index) ? 'text-white/90' : 'text-white/60'}`}>
+                                    <p className={`font-normal text-xs sm:text-sm leading-relaxed transition-colors duration-500 ${
+                                        (hoveredIndex === index || expandedIndex === index) ? 'text-white/90' : 'text-white/60'
+                                    }`}>
                                         {(hoveredIndex === index || expandedIndex === index) ? cap.fullDesc : (
                                             <>{cap.shortDesc} <span className="text-white/80 font-medium">Read more...</span></>
                                         )}
                                     </p>
-                                </motion.div>
+                                </div>
                             </div>
 
-                            {/* View Details Button */}
                             <Button
                                 variant={(hoveredIndex === index || expandedIndex === index) ? 'primary' : undefined}
-                                className={`w-full py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 ${(hoveredIndex === index || expandedIndex === index)
-                                    ? ''
-                                    : 'bg-white/20 text-white backdrop-blur-sm hover:bg-white/30'
-                                    }`}
+                                className={`w-full py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 ${
+                                    (hoveredIndex === index || expandedIndex === index)
+                                        ? ''
+                                        : 'bg-white/20 text-white backdrop-blur-sm hover:bg-white/30'
+                                }`}
                             >
                                 View Details
                             </Button>
                         </div>
-                    </motion.div>
+                    </div>
                 ))}
             </div>
         </SectionWrapper>
     );
-};
+});
+
+CapabilitiesSection.displayName = 'CapabilitiesSection';
 
 export default CapabilitiesSection;

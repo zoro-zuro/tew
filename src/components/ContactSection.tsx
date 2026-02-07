@@ -55,7 +55,7 @@ const ContactSection: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-2 sm:gap-12">
                     {/* Left Column */}
                     <div className="w-full lg:w-[45%] space-y-3 sm:space-y-6">
-                        <div className="flex items-center gap-2 bg-white/5 w-fit px-3 py-1.5 rounded-full">
+                        <div className="flex items-center gap-2 bg-brand/5 w-fit px-3 py-1.5 rounded-full">
                             <div className="relative w-2 h-2">
                                 <div className="absolute inset-0 rounded-full bg-brand" />
                                 <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />

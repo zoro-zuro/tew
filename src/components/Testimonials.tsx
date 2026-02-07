@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { Quote } from 'lucide-react';
 
@@ -29,9 +29,7 @@ const testimonials = [
     }
 ];
 
-
-
-const TestimonialCard = ({ item }: { item: typeof testimonials[0] }) => (
+const TestimonialCard = memo(({ item }: { item: typeof testimonials[0] }) => (
     <div className="bg-white p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-brand/20 shadow-sm mb-2 flex flex-col h-full">
         <Quote className="text-brand w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4 fill-brand opacity-60" />
         <h3 className="text-base sm:text-xl font-bold text-[#1A1A1A] mb-2 sm:mb-3 leading-tight">
@@ -66,9 +64,11 @@ const TestimonialCard = ({ item }: { item: typeof testimonials[0] }) => (
             </div>
         </div>
     </div>
-);
+));
 
-const Testimonials: React.FC = () => {
+TestimonialCard.displayName = 'TestimonialCard';
+
+const Testimonials: React.FC = memo(() => {
     return (
         <SectionWrapper id="testimonials" className="bg-white overflow-hidden">
             <div className="text-center mb-10 sm:mb-16 px-4">
@@ -79,18 +79,17 @@ const Testimonials: React.FC = () => {
                     </div>
                     <span className="text-black text-[10px] sm:text-xs font-medium">Testimonials</span>
                 </div>
-                <h2 className="font-montserrat text-xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1A1A1A] tracking-tight">
+                <h2 className="font-montserrat text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1A1A1A] tracking-tight">
                     Trusted by Leading Industrial Brands
                 </h2>
             </div>
 
-            {/* Mobile View - Single Row Horizontal Marquee */}
-            <div className="sm:hidden relative overflow-hidden px-4">
-                {/* Left/Right Faders */}
+            {/* Mobile View - Single Row Horizontal Marquee - Optimized */}
+            <div className="sm:hidden relative overflow-hidden px-4 will-change-transform" style={{ transform: 'translateZ(0)' }}>
                 <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
 
-                <div className="animate-marquee flex gap-3 py-2">
+                <div className="animate-marquee flex gap-3 py-2 will-change-transform" style={{ transform: 'translateZ(0)' }}>
                     {[...testimonials, ...testimonials, ...testimonials, ...testimonials].map((item, i) => (
                         <div 
                             key={i} 
@@ -133,28 +132,25 @@ const Testimonials: React.FC = () => {
                 </div>
             </div>
 
-            {/* Desktop/Tablet View - Marquee */}
+            {/* Desktop/Tablet View - Marquee - GPU Accelerated */}
             <div
-                className="hidden sm:block relative mx-auto overflow-hidden"
-                style={{ width: '900px', height: '700px' }}
+                className="hidden sm:block relative mx-auto overflow-hidden will-change-transform"
+                style={{ width: '900px', height: '700px', transform: 'translateZ(0)' }}
             >
-                {/* Top/Bottom Faders */}
                 <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent z-20 pointer-events-none" />
                 <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-20 pointer-events-none" />
 
                 <div className="grid grid-cols-2 gap-8 h-full">
-                    {/* Column 1 - Downwards */}
                     <div className="relative overflow-hidden h-full py-2">
-                        <div className="animate-marquee-vertical flex flex-col gap-4">
+                        <div className="animate-marquee-vertical flex flex-col gap-4 will-change-transform" style={{ transform: 'translateZ(0)' }}>
                             {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
                                 <TestimonialCard key={i} item={t} />
                             ))}
                         </div>
                     </div>
 
-                    {/* Column 2 - Reverse/Upwards */}
                     <div className="relative overflow-hidden h-full py-2">
-                        <div className="animate-marquee-vertical flex flex-col gap-4 [animation-direction:reverse]">
+                        <div className="animate-marquee-vertical flex flex-col gap-4 [animation-direction:reverse] will-change-transform" style={{ transform: 'translateZ(0)' }}>
                             {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
                                 <TestimonialCard key={i} item={t} />
                             ))}
@@ -164,6 +160,8 @@ const Testimonials: React.FC = () => {
             </div>
         </SectionWrapper>
     );
-};
+});
+
+Testimonials.displayName = 'Testimonials';
 
 export default Testimonials;
