@@ -1,29 +1,33 @@
 import React, { useState, useEffect, memo, useCallback } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { motion, AnimatePresence } from 'framer-motion';
-import Button from './common/Button';
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import hotForgedImg from '../assets/img/capablities/1.jpg';
 import machinedImg from '../assets/img/capablities/2.jpg';
 import customImg from '../assets/img/capablities/3.png';
+import Badge from './common/Badge';
 
 const capabilities = [
     {
         title: "Hot Forged Components",
         shortDesc: "We manufacture steel, brass, aluminum, and copper forged",
-        fullDesc: "We manufacture steel, brass, aluminum, and copper forged components with precision and durability. Our hot forging process ensures superior strength and reliability for industrial applications.",
+        fullDesc: `We manufacture steel, brass, aluminum, and copper forged components engineered for superior controlled hot forging process enhances grain structure, improves load-bearing capacity, and minimizes material waste.
+         With in-house tooling, process control, and quality inspection, we deliver consistent, high-volume parts that meet demanding industrial standards—ideal for applications requiring reliability under extreme conditions`,
         image: hotForgedImg
     },
     {
         title: "Machined Components",
         shortDesc: "Our advanced CNC machining capabilities deliver complex",
-        fullDesc: "Our advanced CNC machining capabilities deliver complex precision components with tight tolerances. From prototyping to high-volume production, we ensure exceptional quality and consistency.",
+        fullDesc: `Our advanced CNC machining capabilities enable production with excellent dimensional tolerance accuracy and surface finish.
+         We handle a wide range of materials and geometries to meet diverse industrial and automotive requirements. From single prototype to large-scale production, our machining process ensures repeatability, precision, and consistent output—supporting OEMs with dependable components that integrate seamlessly into their assemblies.`,
         image: machinedImg
     },
     {
         title: "Custom Manufacturing",
         shortDesc: "We provide custom manufacturing solutions based on your",
-        fullDesc: "We provide custom manufacturing solutions based on your specific requirements. From design to delivery, we work closely with you to create bespoke components that meet your exact specifications.",
+        fullDesc: `We offer end-to-end custom manufacturing solutions built around your drawings, specifications, and production goals. Our OEM engineering team understands collaborate functional requirements with OEMs, optimize designs, and plan efficient manufacturing workflows. 
+        From concept support and material selection to full-scale production, Thirmula acts as a long-term manufacturing partner—delivering business flexible solutions tailored to your business needs.`,
         image: customImg
     }
 ];
@@ -63,16 +67,10 @@ const CapabilitiesSection: React.FC = memo(() => {
     const cap = capabilities[currentSlide];
 
     return (
-        <SectionWrapper id="capabilities" className="bg-white">
-            <div className="text-center mb-8 sm:mb-16 px-4">
-                <div className="inline-flex items-center gap-2 bg-brand/5 px-4 sm:px-5 py-2 rounded-full mb-4 sm:mb-6">
-                    <div className="relative w-2 sm:w-2.5 h-2 sm:h-2.5">
-                        <div className="absolute inset-0 rounded-full bg-brand" />
-                        <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
-                    </div>
-                    <span className="text-black text-xs sm:text-sm font-medium">Manufacturing Capabilities</span>
-                </div>
-                <h2 className="font-montserrat text-lg sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1A1A1A] tracking-tight">
+        <SectionWrapper id="capabilities" className="bg-white px-[94px] pb-0">
+            <div className="flex flex-col items-center text-center mb-[28px]">
+                <Badge title="Manufacturing Capabilities" />
+                <h2 className="font-montserrat text-lg sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1A1A1A]" style={{ lineHeight: "140%" }}>
                     Built for Industrial Scale
                 </h2>
             </div>
@@ -102,18 +100,19 @@ const CapabilitiesSection: React.FC = memo(() => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
 
                         <div className="absolute inset-0 z-20 p-5 flex flex-col justify-end">
-                            <h3 className="font-montserrat text-lg font-bold text-white leading-tight mb-2">
+                            <h3 className="font-montserrat text-[30px] font-[900] text-white mb-2">
                                 {cap.title}
                             </h3>
-                            <p className="font-normal text-xs text-white/80 leading-relaxed line-clamp-2 mb-3">
-                                {cap.shortDesc}
+                            <p className="font-regular font-poppins text-[12px] text-white/60 leading-relaxed mb-3" style={{ lineHeight: "140%" }}>
+                                {cap.shortDesc}{" "}
+                                <span className="text-white">Read More</span>
                             </p>
-                            <Button
-                                variant="primary"
+                            <button
+
                                 className="w-full py-2.5 rounded-lg font-semibold text-xs"
                             >
                                 View Details
-                            </Button>
+                            </button>
                         </div>
                     </motion.div>
                 </AnimatePresence>
@@ -136,72 +135,88 @@ const CapabilitiesSection: React.FC = memo(() => {
                         <button
                             key={idx}
                             onClick={() => setCurrentSlide(idx)}
-                            className={`w-2 h-2 rounded-full transition-all ${
-                                idx === currentSlide ? 'bg-brand w-4' : 'bg-brand/30'
-                            }`}
+                            className={`w-2 h-2 rounded-full transition-all ${idx === currentSlide ? 'bg-brand w-4' : 'bg-brand/30'
+                                }`}
                         />
                     ))}
                 </div>
             </div>
 
             {/* Desktop Grid View - Optimized with will-change */}
-            <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-[1400px] mx-auto px-4 sm:px-6">
+            <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-[1400px] h-[500px]">
                 {capabilities.map((cap, index) => (
                     <div
                         key={index}
                         onMouseEnter={() => setHoveredIndex(index)}
                         onMouseLeave={() => setHoveredIndex(null)}
                         onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-                        className="relative h-[400px] sm:h-[500px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden group cursor-pointer will-change-transform"
+                        className="relative h-[400px] sm:h-[500px] sm:rounded-[36px] overflow-hidden group cursor-pointer will-change-transform"
                         style={{ transform: 'translateZ(0)' }}
                     >
                         {/* Background Image with GPU acceleration */}
-                        <div className="absolute inset-0 transition-transform duration-700 will-change-transform">
+                        <div className="absolute object-cover inset-0 transition-transform duration-700 will-change-transform">
                             <img
                                 src={cap.image}
                                 alt={cap.title}
-                                className={`w-full h-full object-cover transition-transform duration-700 will-change-transform ${
-                                    (hoveredIndex === index || expandedIndex === index) ? 'scale-110' : 'scale-100'
-                                }`}
+                                className={`w-full h-full object-cover translate-x-0 transition-transform duration-700 will-change-transform`}
                                 loading="lazy"
                                 decoding="async"
                             />
                         </div>
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
-
-                        <div className="absolute inset-0 z-20 p-5 sm:p-8 flex flex-col justify-end">
+                        {/* Content container */}
+                        <div
+                            className="absolute bottom-0 left-0 right-0 z-20 p-5 sm:p-8 flex flex-col transition-all duration-500"
+                        >
+                            <div
+                                className="absolute inset-0 -z-10 transition-all duration-500"
+                                style={{
+                                    background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)',
+                                    backdropFilter: 'blur(5px)',
+                                    WebkitBackdropFilter: 'blur(5px)',
+                                    maskImage: 'linear-gradient(to top, black 50%, transparent 100%)',
+                                    WebkitMaskImage: 'linear-gradient(to top, black 50%, transparent 100%)'
+                                }}
+                            />
                             <h3 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight mb-2 sm:mb-3">
                                 {cap.title}
                             </h3>
 
                             <div className="overflow-hidden transition-all duration-500 ease-out mb-3 sm:mb-4 md:mb-6">
-                                <div
-                                    className="mb-2 sm:mb-4"
-                                    style={{
+                                <motion.div
+                                    initial={false}
+                                    animate={{
                                         height: (hoveredIndex === index || expandedIndex === index) ? 'auto' : '24px',
+                                        opacity: 1
                                     }}
+                                    transition={{ duration: 0.5, ease: "easeOut" }}
+                                    className="mb-2 sm:mb-4"
                                 >
-                                    <p className={`font-normal text-xs sm:text-sm leading-relaxed transition-colors duration-500 ${
-                                        (hoveredIndex === index || expandedIndex === index) ? 'text-white/90' : 'text-white/60'
-                                    }`}>
-                                        {(hoveredIndex === index || expandedIndex === index) ? cap.fullDesc : (
-                                            <>{cap.shortDesc} <span className="text-white/80 font-medium">Read more...</span></>
+                                    <p className={`font-normal text-xs sm:text-[12px] leading-relaxed transition-colors duration-500 ${(hoveredIndex === index || expandedIndex === index) ? 'text-white/90' : 'text-white/60'
+                                        }`}>
+                                        {(hoveredIndex === index || expandedIndex === index) ? (
+                                            <span className="block animate-fadeIn">{cap.fullDesc}</span>
+                                        ) : (
+                                            <span className="line-clamp-2">
+                                                {cap.shortDesc} <span className="text-white/80 font-medium whitespace-nowrap">Read more...</span>
+                                            </span>
                                         )}
                                     </p>
-                                </div>
+                                </motion.div>
                             </div>
 
-                            <Button
-                                variant={(hoveredIndex === index || expandedIndex === index) ? 'primary' : undefined}
-                                className={`w-full py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 ${
-                                    (hoveredIndex === index || expandedIndex === index)
-                                        ? ''
-                                        : 'bg-white/20 text-white backdrop-blur-sm hover:bg-white/30'
-                                }`}
+                            <button
+                                className="rounded-[16px] px-[16px] py-[12px] text-white font-medium transition-all hover:bg-[#fe500050]"
+                                style={{
+                                    background: '#fe500073',
+
+
+                                    backgroundOrigin: 'border-box',
+                                    backgroundClip: 'padding-box, border-box',
+                                    boxShadow: '0px -11px 16px 0px #FF5E00 inset, 0px 4px 16px 0px #FF5E0080'
+                                }}
                             >
                                 View Details
-                            </Button>
+                            </button>
                         </div>
                     </div>
                 ))}

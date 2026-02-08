@@ -13,9 +13,9 @@ const Button: React.FC<ButtonProps> = memo(({
     ...props
 }) => {
     const variants = {
-        primary: "bg-gradient-to-br from-[#800000] via-[#FE580A] to-[#FFD700] bg-[length:200%_auto] hover:bg-bottom text-white shadow-lava-glow",
+        primary: "bg-[#FE5200] hover:bg-[#FF6B35] text-white",
         secondary: "bg-white text-dark hover:bg-gray-100",
-        outline: "border-2 border-molten-orange text-molten-orange hover:bg-gradient-to-br hover:from-[#800000] hover:via-[#FE580A] hover:to-[#FFD700] hover:text-white"
+        outline: "border-2 border-[#FE5200] text-[#FE5200] hover:bg-[#FE5200] hover:text-white"
     };
 
     return (

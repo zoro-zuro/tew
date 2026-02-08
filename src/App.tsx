@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 
 const App: React.FC = () => {
   return (
-    <main className="w-full overflow-x-hidden">
+    <main className="w-full">
       <Navbar />
       <Hero />
       <AboutSection />

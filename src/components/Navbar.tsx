@@ -1,196 +1,164 @@
-import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
+import React, { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from './common/Button';
 import { cn } from '../lib/utils';
 import { Menu, X } from 'lucide-react';
+import logoImg from '../assets/img/logo.png';
 
 const Navbar: React.FC = memo(() => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [activeSection, setActiveSection] = useState('home');
-
-    // Use refs to prevent unnecessary re-renders
-    const observerRef = useRef<IntersectionObserver | null>(null);
-
-    // Optimized scroll handler with debounce
-    useEffect(() => {
-        let ticking = false;
-
-        const handleScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    setIsScrolled(window.scrollY > 50);
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    // Optimized section observer
-    useEffect(() => {
-        const sections = ['home', 'about', 'capabilities', 'testimonials', 'faq'];
-
-        observerRef.current = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveSection(entry.target.id);
-                }
-            });
-        }, {
-            root: null,
-            rootMargin: '-20% 0px -70% 0px',
-            threshold: 0
-        });
-
-        sections.forEach((sectionId) => {
-            const element = document.getElementById(sectionId);
-            if (element && observerRef.current) {
-                observerRef.current.observe(element);
-            }
-        });
-
-        return () => {
-            if (observerRef.current) {
-                observerRef.current.disconnect();
-            }
-        };
-    }, []);
 
     const navItems = [
         { name: 'HOME', href: '#home', id: 'home' },
-        { name: 'ABOUT US', href: '#about', id: 'about' },
         { name: 'CAPABILITIES', href: '#capabilities', id: 'capabilities' },
-        { name: 'TESTIMONIALS', href: '#testimonials', id: 'testimonials' },
-        { name: "FAQ's", href: '#faq', id: 'faq' }
+        { name: 'ABOUT US', href: '#about', id: 'about' },
+        { name: "FACILITIES", href: '#services', id: 'services' }
     ];
 
-    const handleNavClick = useCallback((href: string) => {
+    const handleNavClick = (href: string) => {
         setMobileMenuOpen(false);
         const element = document.querySelector(href);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
-    }, []);
+    };
 
     return (
-        <>
-            {/* Sticky Navbar - Optimized */}
-            <nav
-                className={cn(
-                    "fixed top-0 left-0 right-0 z-50 transition-all duration-500 will-change-transform",
-                    "py-4 sm:py-6 lg:py-8",
-                    isScrolled ? "bg-black/30 backdrop-blur-xl md:bg-transparent md:backdrop-blur-none py-3" : "bg-transparent"
-                )}
-                style={{ transform: 'translateZ(0)' }}
-            >
-                <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12">
-                    {/* Desktop Layout */}
-                    <div className="hidden lg:flex items-center justify-center relative">
-                        {/* Logo - GPU accelerated transform */}
-                        <div
-                            className="flex items-center z-10 will-change-transform"
-                            style={{
-                                transform: `translateX(${isScrolled ? '-280px' : '-350px'}) scale(${isScrolled ? '0.7' : '1'})`,
-                                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-                            }}
-                        >
-                            <div className="bg-[#0A0A0A] border border-brand/20 p-4 rounded-2xl flex items-center justify-center shadow-2xl">
-                                <span className="font-montserrat text-brand font-black text-2xl tracking-tighter">TEW</span>
-                            </div>
-                        </div>
+        <nav className="relative z-50 w-full bg-black py-4 sm:py-6 lg:pt-[68px] md:pb-0">
+            <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-[88px]">
+                {/* Desktop Layout - As shown in image */}
+                <div className="hidden lg:flex items-center justify-between">
+                    {/* Logo - Left side */}
+                    <div className="flex items-center">
+                        <img
+                            src={logoImg}
+                            alt="TEW Logo"
+                            className="h-[50px] w-[72px] sm:h-[68px] sm:w-[98px] object-contain"
+                        />
+                    </div>
 
-                        {/* Center Nav Container - GPU accelerated */}
-                        <div
-                            className="flex items-center justify-center bg-[#0A0A0A]/90 backdrop-blur-xl border border-brand/20 rounded-full absolute left-1/2 will-change-transform"
-                            style={{
-                                transform: 'translateX(-50%) translateZ(0)',
-                                padding: isScrolled ? '12px 160px 12px 110px' : '20px 40px',
-                                backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.32)' : '#0A0A0A',
-                                backdropFilter: isScrolled ? 'blur(12px)' : 'blur(0px)',
-                                borderRadius: isScrolled ? '12px' : '50px',
-                                transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-                            }}
-                        >
-                            <div className="flex items-center gap-12">
-                                {navItems.map((item) => (
-                                    <a
-                                        key={item.name}
-                                        href={item.href}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handleNavClick(item.href);
-                                        }}
-                                        className={cn(
-                                            "text-sm font-bold tracking-wide transition-colors hover:text-white relative py-2 whitespace-nowrap",
-                                            activeSection === item.id ? "text-white" : "text-white/40"
-                                        )}
+                    {/* Center Pill Nav */}
+                    <div className="flex items-center bg-[#1A1A1A] border border-brand/20 rounded-[28px] px-[26px] py-[12px] gap-[36px]">
+                        {navItems.map((item, idx) => (
+                            <a
+                                key={item.name}
+                                href={item.href}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleNavClick(item.href);
+                                }}
+                                className={cn(
+                                    "text-[24px] font-regular font-bebas transition-all hover:text-white/50 relative px-[12px] py-[8px] whitespace-nowrap",
+                                    idx === 0 ? "text-white" : "text-white/40"
+                                )}
+                                style={{ letterSpacing: "1px" }}
+                            >
+                                {item.name}
+                                {idx === 0 && (
+                                    <motion.div
+                                        layoutId="nav-indicator"
+                                        className="absolute bottom-0 left-0 right-0 h-[2px] overflow-hidden rounded-full"
                                     >
-                                        {item.name}
-                                        {activeSection === item.id && (
-                                            <motion.div
-                                                layoutId="nav-indicator"
-                                                className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-brand via-brand/50 to-transparent"
-                                                initial={false}
-                                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                            />
-                                        )}
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Contact Button - GPU accelerated */}
-                        <div
-                            className="flex items-center z-10 will-change-transform"
-                            style={{
-                                transform: `translateX(${isScrolled ? '295px' : '450px'}) scale(${isScrolled ? '0.7' : '1'})`,
-                                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-                            }}
-                        >
-                            <a href="#contact" onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}>
-                                <div className="bg-[#0A0A0A]/40 border border-brand/10 p-2 rounded-xl">
-                                    <Button
-                                        variant="primary"
-                                        className="px-10 py-3.5 rounded-xl font-black text-sm text-white"
-                                    >
-                                        Contact Us
-                                    </Button>
-                                </div>
+                                        <div className="absolute inset-0 bg-[#FE5200]/20" />
+                                        <motion.div
+                                            className="absolute top-0 bottom-0 w-full bg-gradient-to-r from-transparent via-[#FE5200] to-transparent"
+                                            initial={{ x: '-100%' }}
+                                            animate={{ x: ['-100%', '100%', '-100%'] }}
+                                            transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+                                        />
+                                    </motion.div>
+                                )}
                             </a>
-                        </div>
+                        ))}
                     </div>
 
-                    {/* Mobile Nav - Fixed white border issue */}
-                    <div className="lg:hidden flex items-center justify-between">
-                        <div className="flex items-center">
-                            <div className="bg-[#0A0A0A] border border-brand/20 p-2 sm:p-4 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-2xl">
-                                <span className="font-montserrat text-brand font-black text-md sm:text-2xl tracking-tighter">TEW</span>
+                    {/* Contact Button - Right side (as shown in image) */}
+                    <a href="#contact" onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }} className="group">
+                        <div className="relative inline-block">
+                            {/* Glass effect background layer with gradient border - 4px padding on each side */}
+                            <div
+                                className="relative rounded-[22px]"
+                                style={{
+                                    width: '160px', // 138px + 4px left + 4px right
+                                    height: '68px', // 50px + 4px top + 4px bottom
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    backdropFilter: 'blur(5px)',
+                                    borderRadius: '22px',
+                                    padding: '1px',
+                                }}
+                            >
+                                {/* Gradient border for glass layer - top left to bottom right */}
+                                <div
+                                    className="absolute inset-0 rounded-[22px]"
+                                    style={{
+                                        background: 'linear-gradient(45deg, rgba(254, 82, 0, 0.4) 0%, rgba(37, 36, 36, 0.3) 100%)',
+                                        borderRadius: '22px',
+                                        padding: '1px',
+                                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                        WebkitMaskComposite: 'xor',
+                                        maskComposite: 'exclude',
+                                    }}
+                                />
+                            </div>
+
+                            {/* Main orange button with gradient border - centered */}
+                            <div
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl transition-all duration-300 group-hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3)]"
+                                style={{
+                                    width: '140px',
+                                    height: '50px',
+                                    borderRadius: '16px',
+                                    padding: '12px 16px',
+                                    background: 'rgba(254, 82, 0, 1)',
+                                    border: '1px solid transparent',
+                                    backgroundImage: `linear-gradient(rgba(254, 82, 0, 1), rgba(254, 82, 0, 1)), 
+                                                          linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                    backgroundOrigin: 'border-box',
+                                    backgroundClip: 'padding-box, border-box',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '10px'
+                                }}
+                            >
+                                <span className="font-montserrat font-extrabold text-[18px] text-white" style={{ lineHeight: "140%" }}>
+                                    Contact Us
+                                </span>
                             </div>
                         </div>
 
-                        <button
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="bg-[#0A0A0A]/40 border border-brand/10 p-2 rounded-xl text-white will-change-transform active:scale-95 transition-transform"
-                        >
-                            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
+                    </a>
                 </div>
 
-                {/* Mobile Menu Dropdown */}
-                <AnimatePresence>
-                    {mobileMenuOpen && (
+                {/* Mobile Nav */}
+                <div className="lg:hidden flex items-center justify-between">
+                    <div className="flex items-center">
+                        <img
+                            src={logoImg}
+                            alt="TEW Logo"
+                            className="h-[50px] w-[72px] sm:h-[68px] sm:w-[98px] object-contain"
+                        />
+                    </div>
+
+                    <button
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        className="bg-[#0A0A0A]/40 border border-brand/10 p-2 rounded-xl text-white"
+                    >
+                        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
+            </div >
+
+            {/* Mobile Menu Dropdown */}
+            <AnimatePresence>
+                {
+                    mobileMenuOpen && (
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.2 }}
-                            className="lg:hidden fixed top-20 left-4 right-4 z-40 bg-[#0A0A0A]/95 backdrop-blur-xl border border-brand/20 rounded-2xl p-6 will-change-transform"
-                            style={{ transform: 'translateZ(0)' }}
+                            className="lg:hidden fixed top-20 left-4 right-4 z-40 bg-[#0A0A0A]/95 backdrop-blur-xl border border-brand/20 rounded-2xl p-6"
                         >
                             <div className="flex flex-col gap-4">
                                 {navItems.map((item) => (
@@ -201,7 +169,7 @@ const Navbar: React.FC = memo(() => {
                                             e.preventDefault();
                                             handleNavClick(item.href);
                                         }}
-                                        className="text-white font-bold text-sm py-2 px-4 rounded-xl hover:bg-white/10 transition-colors active:scale-95 transform"
+                                        className="text-white font-bold text-sm py-2 px-4 rounded-xl hover:bg-white/10 transition-colors"
                                     >
                                         {item.name}
                                     </a>
@@ -216,10 +184,10 @@ const Navbar: React.FC = memo(() => {
                                 </a>
                             </div>
                         </motion.div>
-                    )}
-                </AnimatePresence>
-            </nav>
-        </>
+                    )
+                }
+            </AnimatePresence >
+        </nav >
     );
 });
 

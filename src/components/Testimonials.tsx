@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { Quote } from 'lucide-react';
+import Badge from './common/Badge';
 
 const testimonials = [
     {
@@ -30,16 +31,16 @@ const testimonials = [
 ];
 
 const TestimonialCard = memo(({ item }: { item: typeof testimonials[0] }) => (
-    <div className="bg-white p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-brand/20 shadow-sm mb-2 flex flex-col h-full">
-        <Quote className="text-brand w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4 fill-brand opacity-60" />
-        <h3 className="text-base sm:text-xl font-bold text-[#1A1A1A] mb-2 sm:mb-3 leading-tight">
+    <div className="bg-[#fffdfb]  p-5 sm:p-[16px] rounded-[1.5rem] sm:rounded-[16px] border border-brand/30 shadow-sm mb-2 flex flex-col h-full">
+        <h3 className='text-[48px] font-montserrat font-bold text-primary'>“</h3>
+        <h3 className="heading mb-[12px] text-[24px] text-[#2e2e2e]" style={{ lineHeight: "140%" }}>
             {item.title}
         </h3>
-        <p className="text-[#1A1A1A]/60 font-normal leading-relaxed mb-4 sm:mb-6 flex-grow text-xs sm:text-sm">
+        <p className="text-[#2e2e2e]/70 font-poppins font-regular mb-4 sm:mb-[20px] flex-grow text-xs sm:text-[16px]" style={{ lineHeight: "140%" }}>
             {item.text}
         </p>
         <div className="flex items-center gap-2 sm:gap-3 pt-3 sm:pt-4 border-t border-gray-50">
-            <div 
+            <div
                 className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg p-1 sm:p-1.5"
                 style={{ backgroundColor: item.brandColor + '15' }}
             >
@@ -59,8 +60,8 @@ const TestimonialCard = memo(({ item }: { item: typeof testimonials[0] }) => (
                 />
             </div>
             <div>
-                <h4 className="font-bold text-[#1A1A1A] text-xs sm:text-sm">{item.author}</h4>
-                <p className="text-[10px] sm:text-xs font-medium text-gray-400">{item.role}</p>
+                <h4 className="font-semibold text-[#2e2e2e] text-xs sm:text-[16px] font-poppins" style={{ lineHeight: "140%" }}>{item.author}</h4>
+                <p className="text-[10px] text-[#2e2e2e]/40 sm:text-[12px] font-medium text-gray-400 font-poppins" style={{ lineHeight: "140%" }}>{item.role}</p>
             </div>
         </div>
     </div>
@@ -71,15 +72,9 @@ TestimonialCard.displayName = 'TestimonialCard';
 const Testimonials: React.FC = memo(() => {
     return (
         <SectionWrapper id="testimonials" className="bg-white overflow-hidden">
-            <div className="text-center mb-10 sm:mb-16 px-4">
-                <div className="flex items-center gap-2 bg-brand/5 w-fit px-3 sm:px-4 py-1.5 rounded-full mx-auto mb-4 sm:mb-6">
-                    <div className="relative w-2 h-2">
-                        <div className="absolute inset-0 rounded-full bg-brand" />
-                        <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
-                    </div>
-                    <span className="text-black text-[10px] sm:text-xs font-medium">Testimonials</span>
-                </div>
-                <h2 className="font-montserrat text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1A1A1A] tracking-tight">
+            <div className="felx flex-col items-center justify-center w-full inline-flex text-center mb-[26px] px-4">
+                <Badge title="Testimonials" />
+                <h2 className="heading">
                     Trusted by Leading Industrial Brands
                 </h2>
             </div>
@@ -91,8 +86,8 @@ const Testimonials: React.FC = memo(() => {
 
                 <div className="animate-marquee flex gap-3 py-2 will-change-transform" style={{ transform: 'translateZ(0)' }}>
                     {[...testimonials, ...testimonials, ...testimonials, ...testimonials].map((item, i) => (
-                        <div 
-                            key={i} 
+                        <div
+                            key={i}
                             className="flex-shrink-0 w-[220px] bg-white p-3 rounded-lg border border-brand/10 shadow-sm"
                         >
                             <Quote className="text-brand w-3 h-3 mb-1.5 fill-brand opacity-50" />
@@ -103,7 +98,7 @@ const Testimonials: React.FC = memo(() => {
                                 {item.text}
                             </p>
                             <div className="flex items-center gap-1.5 pt-1.5 border-t border-gray-50">
-                                <div 
+                                <div
                                     className="w-5 h-5 flex items-center justify-center rounded p-0.5"
                                     style={{ backgroundColor: item.brandColor + '15' }}
                                 >
@@ -137,8 +132,8 @@ const Testimonials: React.FC = memo(() => {
                 className="hidden sm:block relative mx-auto overflow-hidden will-change-transform"
                 style={{ width: '900px', height: '700px', transform: 'translateZ(0)' }}
             >
-                <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent z-20 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-20 pointer-events-none" />
+                <div className="absolute top-0 left-0 right-0 h-[88px] bg-gradient-to-b from-white to-transparent z-20 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 right-0 h-[88px] bg-gradient-to-t from-white to-transparent z-20 pointer-events-none" />
 
                 <div className="grid grid-cols-2 gap-8 h-full">
                     <div className="relative overflow-hidden h-full py-2">

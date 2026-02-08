@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { motion } from 'framer-motion';
-import Button from './common/Button';
+
 import { cn } from '../lib/utils';
 import { ChevronDown } from 'lucide-react';
+import Badge from './common/Badge';
 
 const requirements = [
     { id: 'forging', label: 'Hot Forging Components' },
@@ -14,6 +15,7 @@ const requirements = [
 const ContactSection: React.FC = () => {
     const [selectedReq, setSelectedReq] = useState('forging');
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
     const selectedLabel = requirements.find(r => r.id === selectedReq)?.label || '';
 
@@ -54,65 +56,72 @@ const ContactSection: React.FC = () => {
 
                 <div className="flex flex-col lg:flex-row gap-2 sm:gap-12">
                     {/* Left Column */}
-                    <div className="w-full lg:w-[45%] space-y-3 sm:space-y-6">
-                        <div className="flex items-center gap-2 bg-brand/5 w-fit px-3 py-1.5 rounded-full">
-                            <div className="relative w-2 h-2">
-                                <div className="absolute inset-0 rounded-full bg-brand" />
-                                <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
-                            </div>
-                            <span className="text-white text-xs font-medium">Get a Quote</span>
-                        </div>
+                    <div className="w-full lg:w-[45%] space-y-3 sm:flex sm:flex-col sm:items-start sm:justify-between">
+                        <div className="flex flex-col w-full">
+                            <Badge title='Get a Quote' textColor='text-white' />
 
-                        <h2 className="text-lg sm:text-3xl md:text-4xl font-bold text-white leading-tight">
-                            {selectedReq === 'forging' ? 'Hot Forging' : selectedReq === 'machined' ? 'Machined' : 'Custom'}<br className="hidden sm:block" />
-                            <span className="sm:hidden"> </span>Manufacturing Quote
-                        </h2>
+                            <h2 className="heading">
+                                {selectedReq === 'forging' ? 'Hot Forging' : selectedReq === 'machined' ? 'Machined' : 'Custom'}<br className="hidden sm:block" />
+                                <span className="sm:hidden"> </span>Manufacturing Quote
+                            </h2>
 
-                        <p className="text-white/50 font-normal leading-relaxed text-xs sm:text-sm max-w-full sm:max-w-[380px]">
-                            Request high-strength forged components in steel, brass, aluminum, or copper — built for industrial durability and performance.
-                        </p>
+                            <p className="font-poppins text-white/60 font-medium leading-relaxed text-xs sm:text-[14px] max-w-full ">
+                                Request high-strength forged components in steel, brass, aluminum, or copper — built for industrial durability and performance.
+                            </p>
 
-                        {/* Mobile Dropdown - Below title and contact card */}
-                        <div className="sm:hidden">
-                            <div className="relative">
-                                <label className="text-white text-[10px] mb-1 block">Select Type</label>
-                                <button
-                                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                                    className="w-full flex items-center justify-between bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-xs"
-                                >
-                                    <span>{selectedLabel}</span>
-                                    <ChevronDown size={14} className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
-                                </button>
-                                {dropdownOpen && (
-                                    <div className="absolute top-full left-0 right-0 mt-1 bg-[#1a1a1a] border border-white/20 rounded-lg overflow-hidden z-10">
-                                        {requirements.map((req) => (
-                                            <button
-                                                key={req.id}
-                                                onClick={() => {
-                                                    setSelectedReq(req.id);
-                                                    setDropdownOpen(false);
-                                                }}
-                                                className={`w-full text-left px-3 py-2 text-xs transition-colors ${selectedReq === req.id ? 'bg-brand/20 text-brand' : 'text-white/70 hover:bg-white/5'
-                                                    }`}
-                                            >
-                                                {req.label}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+                            {/* Mobile Dropdown - Below title and contact card */}
+                            <div className="sm:hidden">
+                                <div className="relative">
+                                    <label className="text-white text-[10px] mb-1 block">Select Type</label>
+                                    <button
+                                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                                        className="w-full flex items-center justify-between bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-xs"
+                                    >
+                                        <span>{selectedLabel}</span>
+                                        <ChevronDown size={14} className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+                                    </button>
+                                    {dropdownOpen && (
+                                        <div className="absolute top-full left-0 right-0 mt-1 bg-[#1a1a1a] border border-white/20 rounded-lg overflow-hidden z-10">
+                                            {requirements.map((req) => (
+                                                <button
+                                                    key={req.id}
+                                                    onClick={() => {
+                                                        setSelectedReq(req.id);
+                                                        setDropdownOpen(false);
+                                                    }}
+                                                    className={`w-full text-left px-3 py-2 text-xs transition-colors ${selectedReq === req.id ? 'bg-brand/20 text-brand' : 'text-white/70 hover:bg-white/5'
+                                                        }`}
+                                                >
+                                                    {req.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
+
 
                         {/* Contact Card - Desktop Only */}
-                        <div className="hidden sm:block pt-8">
-                            <div className="bg-primary/10 border border-primary/30 p-6 rounded-2xl max-w-[280px] space-y-4">
-                                <p className="text-white/50 text-xs leading-relaxed">
+                        <div className="hidden sm:block justify-self-end">
+                            <div className=" border border-primary/10 p-[16px] rounded-[16px] w-fit space-y-[16px]" style={{ background: "#FF5E000D", }}>
+                                <p className="font-poppins font-medium text-white/60 text-[14px]" style={{ lineHeight: "170%" }}>
                                     "Have questions before submitting?<br />
-                                    <span className="text-white/70">Talk to our engineering team"</span>
+                                    Talk to our engineering team"
                                 </p>
-                                <Button variant="primary" className="w-full py-3 rounded-xl font-semibold text-sm">
+                                <button
+                                    className="w-full font-montserrat py-[12px] rounded-[16px] font-semibold text-[16px] text-white transition-all duration-300 hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.5),0px_8px_30px_0px_rgba(254,82,0,0.9),0px_0px_40px_0px_rgba(254,82,0,0.6)]"
+                                    style={{
+                                        background: '#FE5200',
+                                        border: '1px solid transparent',
+                                        backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                        backgroundOrigin: 'border-box',
+                                        backgroundClip: 'padding-box, border-box',
+                                        boxShadow: '0px -11px 16px 0px #FFF3ED4D inset, 0px 4px 16px 0px #FF5E0080'
+                                    }}
+                                >
                                     Contact Us
-                                </Button>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -140,9 +149,43 @@ const ContactSection: React.FC = () => {
                             </div>
 
                             <div className="pt-2 sm:pt-4">
-                                <Button variant="primary" className="w-full py-2 px-4 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-[10px] sm:text-base">
-                                    Get Your Quotation Now
-                                </Button>
+                                <button
+                                    onClick={() => {
+                                        if (formStatus === 'idle') {
+                                            setFormStatus('submitting');
+                                            setTimeout(() => {
+                                                setFormStatus('success');
+                                                setTimeout(() => {
+                                                    setFormStatus('idle');
+                                                }, 3000);
+                                            }, 2000);
+                                        }
+                                    }}
+                                    className="w-full py-2 px-4 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-[10px] sm:text-base text-white transition-all duration-300"
+                                    style={{
+                                        background: formStatus === 'success' ? '#22c55e' : '#FE5200',
+                                        border: '1px solid transparent',
+                                        backgroundImage: formStatus === 'success' ? 'none' : `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                        backgroundOrigin: 'border-box',
+                                        backgroundClip: 'padding-box, border-box',
+                                        boxShadow: formStatus === 'success' ? 'none' : '0px -11px 16px 0px #FFF3ED4D inset'
+                                    }}
+                                >
+                                    {formStatus === 'idle' && "Get Your Quotation Now"}
+                                    {formStatus === 'submitting' && (
+                                        <div className="flex gap-1 justify-center items-center h-[24px]">
+                                            {[0, 1, 2].map((i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    className="w-1.5 h-1.5 bg-white rounded-full"
+                                                    animate={{ y: [0, -6, 0] }}
+                                                    transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.2 }}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                    {formStatus === 'success' && "Check the inbox"}
+                                </button>
                             </div>
 
                             {/* Contact Card - Mobile Only */}
@@ -150,9 +193,19 @@ const ContactSection: React.FC = () => {
                                 <p className="text-white/50 text-[10px] leading-relaxed">
                                     "Have questions? <span className="text-white/70">Talk to our team"</span>
                                 </p>
-                                <Button variant="primary" className="w-full py-2.5 rounded-lg font-semibold text-[10px]">
+                                <button
+                                    className="w-full py-2.5 rounded-lg font-semibold text-[10px] text-white transition-all duration-300"
+                                    style={{
+                                        background: '#FE5200',
+                                        border: '1px solid transparent',
+                                        backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                        backgroundOrigin: 'border-box',
+                                        backgroundClip: 'padding-box, border-box',
+                                        boxShadow: '0px -11px 16px 0px #FFF3ED4D inset, 0px 4px 16px 0px #FF5E0080'
+                                    }}
+                                >
                                     Contact Us
-                                </Button>
+                                </button>
                             </div>
                         </form>
                     </div>

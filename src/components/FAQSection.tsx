@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Badge from './common/Badge';
 
 const faqs = [
     {
@@ -40,21 +41,27 @@ const faqs = [
 
 const FAQItem = ({ question, answer, isOpen, onClick }: { question: string, answer: string, isOpen: boolean, onClick: () => void }) => {
     return (
-        <div className="mb-3 sm:mb-4">
+        <div className={`mb-3 sm:mb-[16px] border-[2px] border-black/10 rounded-[20px] ${isOpen ? 'shadow-md' : ''}`}>
             <button
                 onClick={onClick}
-                className="w-full bg-white border border-gray-200 shadow-sm rounded-xl sm:rounded-2xl px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between group transition-all hover:border-brand/20 hover:shadow-md text-left"
+                className="w-full shadow-sm px-4 sm:px-[20px] py-3 sm:py-[12px] flex items-center justify-between group transition-all hover:border-brand/20 text-left"
             >
-                <span className="text-[#1A1A1A] font-bold sm:font-black text-xs sm:text-lg md:text-xl tracking-tight pr-4">
+                <span className="text-[#1A1A1A] font-poppins font-bold sm:font-[700] line-height-700 text-xs sm:text-lg md:text-[20px]">
                     {question}
                 </span>
-                <div className="bg-gray-200 p-1.5 sm:p-2 rounded-lg group-hover:bg-brand/10 transition-colors flex-shrink-0">
-                    {isOpen ? (
-                        <Minus size={16} className="text-brand sm:w-5 sm:h-5" />
-                    ) : (
-                        <Plus size={16} className="text-[#1A1A1A]/40 group-hover:text-brand sm:w-5 sm:h-5" />
-                    )}
-                </div>
+
+                {isOpen ? (
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="16" width="16" height="4" rx="2" fill="#2E2E2E" />
+                    </svg>
+
+                ) : (
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="16" width="16" height="4" rx="2" fill="#2E2E2E" />
+                        <rect x="20" y="10" width="16" height="4" rx="2" transform="rotate(90 20 10)" fill="#2E2E2E" />
+                    </svg>
+
+                )}
             </button>
             <AnimatePresence>
                 {isOpen && (
@@ -78,8 +85,9 @@ const FAQSection: React.FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
-        <SectionWrapper id="faq" className="bg-white">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-16 items-start">
+        <SectionWrapper id="faq" className="bg-white relative">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-16">
+
                 {/* Left: FAQ List - Full width on mobile */}
                 <div className="lg:col-span-7 order-2 lg:order-1">
                     {faqs.map((faq, index) => (
@@ -94,24 +102,21 @@ const FAQSection: React.FC = () => {
                 </div>
 
                 {/* Right: Text Content - Sticky on desktop */}
-                <div className="lg:col-span-5 lg:pl-10 lg:sticky lg:top-24 order-1 lg:order-2 mb-4 lg:mb-0">
-                    <div className="flex items-center gap-2 bg-brand/5 w-fit px-3 sm:px-4 py-1.5 rounded-full mb-4 sm:mb-8">
-                        <div className="relative w-2 h-2">
-                            <div className="absolute inset-0 rounded-full bg-brand" />
-                            <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
-                        </div>
-                        <span className="text-black text-[10px] sm:text-xs font-medium">FAQ's</span>
+                <div className="lg:col-span-5 order-1 lg:order-2 mb-4 lg:mb-0 relative h-full">
+                    <div className="lg:sticky lg:top-24 lg:pl-10">
+                        <Badge title="FAQ'S" />
+
+                        <h2 className="heading text-[#2e2e2e]">
+                            Answers You Can Trust
+                        </h2>
+
+                        <p className="text-[#2e2e2e]/60 font-poppins font-medium md:line-hieght-170 sm:text-[14px]">
+                            Clear answers to common questions about our OEM
+                            manufacturing capabilities, end-to-end processes, quality
+                            assurance practices, and how we work as a reliable
+                            manufacturing partner for industrial businesses.
+                        </p>
                     </div>
-
-                    <h2 className="text-lg sm:text-2xl md:text-[32px] font-black text-[#1A1A1A] leading-tight mb-3 sm:mb-4">
-                        Answers You Can Trust
-                    </h2>
-
-                    <p className="text-[#1A1A1A]/40 font-medium leading-relaxed text-xs sm:text-sm">
-                        Clear answers to common questions about our OEM manufacturing capabilities,
-                        end-to-end processes, quality assurance practices, and how we work as a
-                        reliable manufacturing partner for industrial businesses.
-                    </p>
                 </div>
             </div>
         </SectionWrapper>

@@ -97,19 +97,19 @@ const Hero: React.FC = memo(() => {
             </div>
 
             {/* Hero Body Content */}
-            <div className="relative z-10 md:w-full w-[95%] max-w-[1440px] flex flex-col items-center text-center px-4 sm:px-6 pt-28 sm:pt-24 md:pt-32 sm:pb-[240px]">
+            <div className="relative z-10 md:w-full w-[95%] max-w-[1440px] flex flex-col items-center text-center px-8 sm:px-6 pt-28 sm:pt-[77px] sm:pb-[160px]">
                 {/* Badge - Simplified animation */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="flex items-center gap-2 bg-[#FE580A]/10 border border-[#FE580A]/20 rounded-full px-2 sm:px-5 py-1 mb-3 sm:mb-10"
+                    className="flex items-center gap-2 bg-[#FE5200]/25 border border-[#FE5200]/20 rounded-full px-2 sm:px-5 md:px-[12px] md:py-[8px] py-1 mb-3 sm:mb-[8px]"
                 >
-                    <div className="relative w-1 h-1">
+                    <div className="relative w-2 h-2">
                         <div className="absolute inset-0 rounded-full bg-brand" />
                         <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
                     </div>
-                    <span className="text-brand text-[6px] font-semibold md:font-extrabold md:text-xs tracking-widest uppercase">#1 on OEM manufacturing</span>
+                    <span className="text-white text-[6px] font-semibold md:font-medium font-inter md:text-[12px]">#1 on OEM manufacturing</span>
                 </motion.div>
 
                 {/* Main Headline */}
@@ -117,12 +117,13 @@ const Hero: React.FC = memo(() => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="font-montserrat max-w-[1200px] text-[18px] md:text-[54px] lg:text-[48px] font-extrabold text-white leading-[1.15] tracking-tight mb-4 md:mb-8 px-2 sm:px-6"
+                    className="font-montserrat max-w-[1200px] text-[18px] md:text-[47px] lg:text-[48px] font-extrabold text-white tracking-tight mb-4 md:mb-[12px] px-2 sm:px-6"
+                    style={{ lineHeight: "140%" }}
                 >
                     <div className="whitespace-nowrap">
                         Complete{' '}
                         <span className="inline-flex items-center align-middle">
-                            <div className="relative w-[16px] md:w-[60px] lg:w-[42px] h-[16px] md:h-[60px] lg:h-[42px] mx-0.5 md:mx-1">
+                            <div className="relative w-[16px] md:w-[60px] lg:w-[42px] hover:w-[50px] md:hover:w-[74px] lg:hover:w-[74px] h-[16px] md:h-[60px] lg:h-[42px] mx-0.5 md:mx-1 transition-all duration-500 ease-in-out rounded-full">
                                 <img
                                     src={oGif}
                                     alt="O"
@@ -133,10 +134,10 @@ const Hero: React.FC = memo(() => {
                             </div>
                             EM
                         </span>{' '}
-                        Manufacturing
+                        Manufacturing Solutions
                     </div>
                     <div className="text-white/90">
-                        Solutions for Industrial Needs
+                        for Industrial Engineering Needs
                     </div>
                 </motion.h1>
 
@@ -145,7 +146,7 @@ const Hero: React.FC = memo(() => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="max-w-[750px] text-white/40 text-[11px] md:text-[14px] md:font-medium leading-tight md:leading-relaxed text-center md:mb-8 mb-4"
+                    className="max-w-[750px] font-poppins text-white/40 text-[11px] md:text-[14px] md:font-medium leading-tight md:leading-relaxed text-center md:mb-[36px] mb-4"
                 >
                     Thirumala Engineering Works is a trusted OEM partner, delivering forged and precision-machined
                     components with end-to-end engineering solutions for industrial brands, all under one roof.
@@ -157,23 +158,54 @@ const Hero: React.FC = memo(() => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                    <a href="#capabilities">
-                        <Button
-                            variant="primary"
-                            className="px-2 sm:px-12 py-1 sm:py-5 rounded-md sm:rounded-2xl md:font-black font-semibold text-[10px] md:text-lg"
-                        >
-                            Explore Capabilities
-                        </Button>
+                    <a href="#capabilities" className="group">
+                        <div className="relative inline-block">
+                            {/* Glass Container - Auto width via padding */}
+                            <div
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    backdropFilter: 'blur(5px)',
+                                    borderRadius: '20px',
+                                    padding: '6px',
+                                    display: 'inline-flex', // Fits content
+                                }}
+                            >
+                                {/* Main Button - Auto width */}
+                                <div
+                                    className="transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_4px_16px_0px_rgba(255,94,0,0.5)] group-hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_6px_24px_0px_rgba(255,94,0,0.7)]"
+                                    style={{
+                                        minWidth: '140px', // Minimum width to maintain presence, but grows
+                                        height: '50px',
+                                        borderRadius: '16px',
+                                        padding: '0 24px', // Horizontal padding for text
+                                        background: 'rgba(254, 82, 0, 1)',
+                                        border: '1px solid transparent',
+                                        backgroundImage: `linear-gradient(rgba(254, 82, 0, 1), rgba(254, 82, 0, 1)), 
+                                                          linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                        backgroundOrigin: 'border-box',
+                                        backgroundClip: 'padding-box, border-box',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        whiteSpace: 'nowrap'
+                                    }}
+                                >
+                                    <span className="font-montserrat font-extrabold text-[14px] md:text-[18px] text-white" style={{ lineHeight: "140%" }}>
+                                        Explore Capabilities
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </a>
                 </motion.div>
 
                 {/* Main Visual Tool Container */}
-                <div className="relative w-full max-w-[1400px] mt-8 sm:mt-16 pb-[100px] sm:pb-[170px]">
+                <div className="relative w-full mt-8 sm:mt-16 pb-[100px] sm:pb-[170px]">
                     {/* Floating Cards - Only animate on desktop, simplified */}
                     <motion.div
-                        animate={{ y: isInViewport ? [0, -10, 0] : 0 }}
+
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute left-[5%] sm:left-[10%] bottom-[30%] sm:bottom-[40%] z-20 w-[100px] sm:w-[140px] md:w-[160px] hidden md:block scale-[0.8] will-change-transform"
+                        className="absolute left-[5%] sm:left-[10%] bottom-[30%] sm:-bottom-[20%] z-20 w-[100px] sm:w-[140px] md:w-[160px] hidden md:block scale-[0.8] will-change-transform"
                         style={{ transform: 'translateZ(0)' }}
                     >
                         <img
@@ -186,7 +218,7 @@ const Hero: React.FC = memo(() => {
                     </motion.div>
 
                     <motion.div
-                        animate={{ y: isInViewport ? [0, 10, 0] : 0 }}
+
                         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                         className="absolute right-8 lg:right-[10%] bottom-[25%] z-20 w-[100px] sm:w-[140px] md:w-[160px] hidden md:block will-change-transform"
                         style={{ transform: 'translateZ(0)' }}
@@ -207,20 +239,20 @@ const Hero: React.FC = memo(() => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute -bottom-[100px] sm:bottom-[200px] md:-bottom-[380px] left-0 sm:-translate-y-1/2 w-full max-w-[1200px] z-[5] will-change-transform"
+                className="absolute -bottom-[100px] sm:bottom-[200px] md:-bottom-[435px] md:left-[74px] md:right-0 left-0 w-full max-w-[1200px] z-[5] will-change-transform"
                 style={{ transform: 'translateZ(0)' }}
             >
                 <img
                     src={heroImg}
                     alt="Industrial Tool"
-                    className="w-full h-auto scale-[1] sm:[0.8] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.8)]"
+                    className="w-full h-auto object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.8)]"
                     loading="eager"
                     decoding="async"
                 />
             </motion.div>
 
             {/* Bottom Overlap - White Rounded */}
-            <div className="absolute bottom-0 left-0 w-full h-4 sm:h-6 md:h-12 bg-white rounded-t-[32px] sm:rounded-t-[64px] z-30 shadow-[0_-30px_60px_rgba(0,0,0,0.15)]" />
+            <div className="absolute bottom-0 left-0 w-full h-4 sm:h-6 md:h-[64px] bg-white rounded-t-[64px] sm:rounded-t-[64px] z-30 shadow-[0_-30px_60px_rgba(0,0,0,0.15)]" />
         </section>
     );
 });

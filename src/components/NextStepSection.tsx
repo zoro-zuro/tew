@@ -1,28 +1,23 @@
 import React from 'react';
-import Button from './common/Button';
+import Badge from './common/Badge';
 
 const NextStepSection: React.FC = () => {
     return (
         <section className="bg-white pb-8 sm:pb-12 px-4 sm:px-6">
             <div
-                className="mx-auto bg-[#FFFBF9] rounded-[20px] sm:rounded-[28px] p-5 sm:p-9 flex flex-col md:flex-row items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
-                style={{ maxWidth: '1095px', minHeight: 'auto', gap: '20px' }}
+                className="mx-auto bg-[#fff3ed]/30 rounded-[20px] sm:rounded-[26px] p-5 sm:p-[36px] flex flex-col md:flex-row items-center justify-between shadow-[0_6px_12px_0px_rgba(0,0,0,0.1)]
+"
+                style={{ maxWidth: '1095px', minHeight: 'auto', gap: '160px' }}
             >
                 {/* Left Side Content */}
                 <div className="flex-1 space-y-3 sm:space-y-4 w-full">
-                    <div className="flex items-center gap-2 bg-brand/5 w-fit px-3 sm:px-4 py-1.5 rounded-full">
-                        <div className="relative w-2 h-2">
-                            <div className="absolute inset-0 rounded-full bg-brand" />
-                            <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
-                        </div>
-                        <span className="text-black text-[10px] sm:text-xs font-medium">Next Step</span>
-                    </div>
+                    <Badge title="Next Step" />
 
-                    <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-[#1A1A1A] leading-tight tracking-tight">
+                    <h2 className="heading">
                         You're Clear on the Process.<br className="hidden sm:block" />Let's Apply It.
                     </h2>
 
-                    <p className="text-[#1A1A1A]/50 font-normal leading-relaxed text-xs sm:text-sm max-w-full sm:max-w-[450px]">
+                    <p className=" font-poppins text-[#2e2e2e]/60 font-medium sm:text-sm max-w-full ">
                         Share your component details with confidence, choose the right
                         manufacturing category, provide inputs, and we'll handle the
                         rest with precision.
@@ -30,16 +25,28 @@ const NextStepSection: React.FC = () => {
                 </div>
 
                 {/* Right Side Action */}
-                <div className="flex-1 w-full flex flex-col items-center gap-2 sm:gap-3 mt-4 sm:mt-0">
-                    <p className="text-[#1A1A1A] text-[11px] sm:text-[13px] text-center mb-1 font-medium">
+                <div className="flex flex-col items-center gap-2 sm:gap-[8px] mt-4 sm:mt-0">
+                    <p className="text-[#2e2e2e]/80 font-poppins font-[700] text-[11px] sm:text-[12px] text-center">
                         Takes only a few minutes to submit.
                     </p>
-                    <Button
-                        variant="primary"
-                        className="w-full px-5 sm:px-8 py-2.5 sm:py-4 rounded-xl font-semibold text-[10px] sm:text-sm"
+                    <button
+                        onClick={() => {
+                            const contactSection = document.getElementById('contact');
+                            if (contactSection) {
+                                contactSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                        className="w-full px-5  py-2.5 sm:px-[76px] sm:py-[16px] rounded-xl font-semibold text-[10px] sm:text-[18px] font-moserrat text-white transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_#FFF3ED4D,0px_4px_16px_0px_#FF5E0080] hover:shadow-[inset_0px_-11px_16px_0px_#FFF3ED4D,0px_4px_16px_0px_#FF5E0080,0_0_0_6px_rgba(254,82,0,0.1)]"
+                        style={{
+                            background: '#FE5200',
+                            border: '1px solid transparent',
+                            backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                            backgroundOrigin: 'border-box',
+                            backgroundClip: 'padding-box, border-box'
+                        }}
                     >
                         Share Your Requirement
-                    </Button>
+                    </button>
                 </div>
             </div>
         </section>

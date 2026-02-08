@@ -7,8 +7,8 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: '#FF6B35',
-                brand: '#FE580A',
+                primary: '#FE520066',
+                brand: '#FE5200',
                 'molten-red': '#B22222',
                 'molten-orange': '#FE580A',
                 'molten-yellow': '#FFD700',
@@ -21,18 +21,19 @@ export default {
                 'border-color': '#E5E7EB',
             },
             boxShadow: {
-                'orange-glow': '0 0 25px rgba(254, 88, 10, 0.5)',
-                'orange-glow-lg': '0 0 40px rgba(254, 88, 10, 0.7)',
-                'lava-glow': '0 0 35px rgba(178, 34, 34, 0.6), 0 0 15px rgba(254, 88, 10, 0.8)',
+                'orange-glow': '0 0 25px rgba(254, 82, 0, 0.5)',
+                'orange-glow-lg': '0 0 40px rgba(254, 82, 0, 0.7)',
+                'lava-glow': '0 0 35px rgba(254, 82, 0, 0.6), 0 0 15px rgba(254, 82, 0, 0.8)',
             },
             animation: {
                 'float': 'float 5s ease-in-out infinite',
                 'sparkle': 'sparkle 3s linear infinite',
                 'marquee-vertical': 'marquee-vertical 35s linear infinite',
                 'smoke': 'smoke 10s ease-out infinite',
-                'marquee': 'marquee 35s linear infinite',
+                'marquee': 'marquee 30s linear infinite',
+                'marquee-reverse': 'marquee-reverse 30s linear infinite',
                 'blink-wave': 'blink-wave 2s ease-in-out infinite',
-                'ripple': 'ripple 2s ease-out infinite',
+                'ripple': 'ripple 4s ease-out infinite',
             },
             keyframes: {
                 'marquee-vertical': {
@@ -40,6 +41,10 @@ export default {
                     '100%': { transform: 'translate3d(0, -50%, 0)' },
                 },
                 'marquee': {
+                    '0%': { transform: 'translate3d(0, 0, 0)' },
+                    '100%': { transform: 'translate3d(-50%, 0, 0)' },
+                },
+                'marquee-reverse': {
                     '0%': { transform: 'translate3d(-50%, 0, 0)' },
                     '100%': { transform: 'translate3d(0, 0, 0)' },
                 },
@@ -69,6 +74,8 @@ export default {
                 sans: ['Poppins', 'sans-serif'],
                 montserrat: ['Montserrat', 'sans-serif'],
                 poppins: ['Poppins', 'sans-serif'],
+                inter: ['Inter', 'sans-serif'],
+                bebas: ['"Bebas Neue"', 'sans-serif'],
             },
             spacing: {
                 'section': '120px',
