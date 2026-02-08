@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SectionWrapper from './common/SectionWrapper';
-import { Plus, Minus } from 'lucide-react';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import Badge from './common/Badge';
 

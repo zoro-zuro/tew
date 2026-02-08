@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { motion } from 'framer-motion';
-import Button from './common/Button';
+
 import { useInViewPort } from '../hooks/useInViewPort';
 import oGif from '../assets/gif/o-gif.gif';
 import heroImg from '../assets/img/hero-img.png';

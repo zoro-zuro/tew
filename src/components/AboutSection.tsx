@@ -13,7 +13,7 @@ import tvsLogo from '../assets/img/marquee-logos/tvs_motor_company_logo.svg.png'
 import bajajLogo from '../assets/img/marquee-logos/bajaj_auto_ltd_logo.svg.png';
 import boschLogo from '../assets/img/marquee-logos/bosch_india_logo.svg.png';
 import experienceBadge from '../assets/img/experience-badge.png';
-import workerLogo from '../assets/img/worker-logo.png';
+
 import locationLogo from '../assets/img/location-log.png';
 
 // Static data outside component
