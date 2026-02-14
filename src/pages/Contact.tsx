@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import Badge from '../components/common/Badge';
 import contact from '../assets/img/contact_location.png';
 import factory from '../assets/img/factory_icon.png';
 const Contact = () => {
-    const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+
     const [formData, setFormData] = useState({
         fullName: '',
         companyName: '',
@@ -115,7 +114,7 @@ const Contact = () => {
                             style={{
                                 background: '#FE5200',
                                 border: '1px solid transparent',
-                                backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                backgroundImage: 'linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)',
                                 backgroundOrigin: 'border-box',
                                 backgroundClip: 'padding-box, border-box',
                                 boxShadow: '0px -11px 16px 0px #FFF3ED4D inset'
@@ -305,7 +304,7 @@ const Contact = () => {
                         style={{
                             background: '#FE5200',
                             border: '1px solid transparent',
-                            backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                            backgroundImage: 'linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)',
                             backgroundOrigin: 'border-box',
                             backgroundClip: 'padding-box, border-box',
                             boxShadow: '0px -11px 16px 0px #FFF3ED4D inset'

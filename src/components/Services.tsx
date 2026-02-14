@@ -7,7 +7,7 @@ import hotForgedImg from '../assets/img/capablities/1.jpg';
 import machinedImg from '../assets/img/capablities/2.jpg';
 import customImg from '../assets/img/capablities/3.png';
 import Badge from './common/Badge';
-import { span } from 'framer-motion/client';
+
 
 const capabilities = [
     {
@@ -36,7 +36,7 @@ const capabilities = [
 
 const CapabilitiesSection: React.FC = memo(() => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+    const [expandedIndex] = useState<number | null>(null);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
 
