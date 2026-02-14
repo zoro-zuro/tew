@@ -1,25 +1,19 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import AboutSection from './components/AboutSection';
-import CapabilitiesSection from './components/Services';
-import Testimonials from './components/Testimonials';
-import ContactSection from './components/ContactSection';
-import FAQSection from './components/FAQSection';
-import NextStepSection from './components/NextStepSection';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import { Route, Routes } from 'react-router-dom';
+import Contact from './pages/Contact';
 
 const App: React.FC = () => {
   return (
     <main className="w-full">
+
       <Navbar />
-      <Hero />
-      <AboutSection />
-      <CapabilitiesSection />
-      <Testimonials />
-      <ContactSection />
-      <FAQSection />
-      <NextStepSection />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
       <Footer />
     </main>
   );

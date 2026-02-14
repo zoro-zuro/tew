@@ -7,6 +7,7 @@ import heroImg from '../assets/img/hero-img.png';
 import heroBgGif from '../assets/bg/hero-gif.gif';
 import heroCardLeft from '../assets/img/hero-card-left.png';
 import heroCardRight from '../assets/img/hero-card-right.png';
+import Badge from './common/Badge';
 
 // Memoized to prevent re-renders
 const Hero: React.FC = memo(() => {
@@ -99,18 +100,7 @@ const Hero: React.FC = memo(() => {
             {/* Hero Body Content */}
             <div className="relative z-10 md:w-full w-[95%] max-w-[1440px] flex flex-col items-center text-center px-8 sm:px-6 pt-28 sm:pt-[77px] sm:pb-[160px]">
                 {/* Badge - Simplified animation */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex items-center gap-2 bg-[#FE5200]/25 border border-[#FE5200]/20 rounded-full px-2 sm:px-5 md:px-[12px] md:py-[8px] py-1 mb-3 sm:mb-[8px]"
-                >
-                    <div className="relative w-2 h-2">
-                        <div className="absolute inset-0 rounded-full bg-brand" />
-                        <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
-                    </div>
-                    <span className="text-white text-[6px] font-semibold md:font-medium font-inter md:text-[12px]">#1 on OEM manufacturing</span>
-                </motion.div>
+                <Badge title="#1 on OEM manufacturing" textColor='text-white' />
 
                 {/* Main Headline */}
                 <motion.h1
@@ -146,7 +136,7 @@ const Hero: React.FC = memo(() => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="max-w-[750px] font-poppins text-white/40 text-[11px] md:text-[14px] md:font-medium leading-tight md:leading-relaxed text-center md:mb-[36px] mb-4"
+                    className="max-w-[750px] font-poppins text-white/40 text-[11px] md:text-[14px] md:font-regular leading-tight md:leading-relaxed text-center md:mb-[36px] mb-4"
                 >
                     Thirumala Engineering Works is a trusted OEM partner, delivering forged and precision-machined
                     components with end-to-end engineering solutions for industrial brands, all under one roof.
@@ -200,7 +190,7 @@ const Hero: React.FC = memo(() => {
                 </motion.div>
 
                 {/* Main Visual Tool Container */}
-                <div className="relative w-full mt-8 sm:mt-16 pb-[100px] sm:pb-[170px]">
+                <div className="relative w-full mt-8 sm:mt-14 pb-[100px] sm:pb-[10px]">
                     {/* Floating Cards - Only animate on desktop, simplified */}
                     <motion.div
 

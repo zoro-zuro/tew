@@ -7,26 +7,28 @@ import hotForgedImg from '../assets/img/capablities/1.jpg';
 import machinedImg from '../assets/img/capablities/2.jpg';
 import customImg from '../assets/img/capablities/3.png';
 import Badge from './common/Badge';
+import { span } from 'framer-motion/client';
 
 const capabilities = [
     {
         title: "Hot Forged Components",
         shortDesc: "We manufacture steel, brass, aluminum, and copper forged",
-        fullDesc: `We manufacture steel, brass, aluminum, and copper forged components engineered for superior controlled hot forging process enhances grain structure, improves load-bearing capacity, and minimizes material waste.
-         With in-house tooling, process control, and quality inspection, we deliver consistent, high-volume parts that meet demanding industrial standards—ideal for applications requiring reliability under extreme conditions`,
+        fullDesc: `We manufacture steel, brass, aluminum, and copper forged components engineered for superior controlled hot forging process enhances grain structure, improves load-bearing capacity, and minimizes material waste.`,
+        fullDesc1: `With in-house tooling, process control, and quality inspection, we deliver consistent, high-volume parts that meet demanding industrial standards—ideal for applications requiring reliability under extreme conditions`,
         image: hotForgedImg
     },
     {
         title: "Machined Components",
         shortDesc: "Our advanced CNC machining capabilities deliver complex",
-        fullDesc: `Our advanced CNC machining capabilities enable production with excellent dimensional tolerance accuracy and surface finish.
-         We handle a wide range of materials and geometries to meet diverse industrial and automotive requirements. From single prototype to large-scale production, our machining process ensures repeatability, precision, and consistent output—supporting OEMs with dependable components that integrate seamlessly into their assemblies.`,
+        fullDesc: `Our advanced CNC machining capabilities enable production with excellent dimensional tolerance accuracy and surface finish.`,
+        fullDesc1: `We handle a wide range of materials and geometries to meet diverse industrial and automotive requirements. From single prototype to large-scale production, our machining process ensures repeatability, precision, and consistent output—supporting OEMs with dependable components that integrate seamlessly into their assemblies.`,
         image: machinedImg
     },
     {
         title: "Custom Manufacturing",
         shortDesc: "We provide custom manufacturing solutions based on your",
-        fullDesc: `We offer end-to-end custom manufacturing solutions built around your drawings, specifications, and production goals. Our OEM engineering team understands collaborate functional requirements with OEMs, optimize designs, and plan efficient manufacturing workflows. 
+        fullDesc: `We offer end-to-end custom manufacturing solutions built around your drawings, specifications, and production goals.`,
+        fullDesc1: `Our OEM engineering team understands collaborate functional requirements with OEMs, optimize designs, and plan efficient manufacturing workflows. 
         From concept support and material selection to full-scale production, Thirmula acts as a long-term manufacturing partner—delivering business flexible solutions tailored to your business needs.`,
         image: customImg
     }
@@ -149,7 +151,7 @@ const CapabilitiesSection: React.FC = memo(() => {
                         key={index}
                         onMouseEnter={() => setHoveredIndex(index)}
                         onMouseLeave={() => setHoveredIndex(null)}
-                        onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+
                         className="relative h-[400px] sm:h-[500px] sm:rounded-[36px] overflow-hidden group cursor-pointer will-change-transform"
                         style={{ transform: 'translateZ(0)' }}
                     >
@@ -194,7 +196,12 @@ const CapabilitiesSection: React.FC = memo(() => {
                                     <p className={`font-normal text-xs sm:text-[12px] leading-relaxed transition-colors duration-500 ${(hoveredIndex === index || expandedIndex === index) ? 'text-white/90' : 'text-white/60'
                                         }`}>
                                         {(hoveredIndex === index || expandedIndex === index) ? (
-                                            <span className="block animate-fadeIn">{cap.fullDesc}</span>
+                                            <span>
+
+                                                <span className="block animate-fadeIn">{cap.fullDesc}</span>
+                                                <br />
+                                                <span className="block animate-fadeIn">{cap.fullDesc1}</span>
+                                            </span>
                                         ) : (
                                             <span className="line-clamp-2">
                                                 {cap.shortDesc} <span className="text-white/80 font-medium whitespace-nowrap">Read more...</span>

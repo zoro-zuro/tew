@@ -44,13 +44,13 @@ const AboutSection: React.FC = memo(() => {
                     {/* Stats Grid */}
                     {/* Stats Grid */}
                     <div className="flex flex-row items-center justify-center gap-1 sm:gap-[30px] md:gap-[128px] w-full py-2 px-1 sm:p-[64px]">
-                        <div className="flex items-center gap-1 sm:gap-[24px] flex-1 justify-center">
+                        <div className="flex items-center gap-1 sm:gap-[24px] flex-1 justify-center w-full">
                             <div className="w-5 sm:w-[78px] h-5 sm:h-[78px] flex items-center justify-center flex-shrink-0">
                                 <img src={happyCustomerIcon} alt="Happy Clients" className="w-full h-full object-contain" loading="lazy" decoding="async" />
                             </div>
                             <div className="flex flex-col items-start gap-[2px] sm:gap-[8px] font-poppins">
                                 <h3 className="text-xs sm:text-[40px] font-bold text-brand leading-none">500+</h3>
-                                <p className="text-gray-600 font-medium text-[8px] sm:text-[16px]">Happy Clients</p>
+                                <p className="text-gray-600 font-medium text-[8px]  sm:text-[16px] " style={{ letterSpacing: "0.4%", lineHeight: "135%" }}>Happy Clients</p>
                             </div>
                         </div>
 
@@ -60,7 +60,7 @@ const AboutSection: React.FC = memo(() => {
                             </div>
                             <div className="flex flex-col items-start gap-[2px] sm:gap-[8px] font-poppins">
                                 <h3 className="text-xs sm:text-[40px] font-bold  text-brand leading-none">10,000+</h3>
-                                <p className="text-gray-600 font-medium text-[8px] sm:text-[16px] ">Tons/Year</p>
+                                <p className="text-gray-600 font-medium text-[8px] sm:text-[16px] " style={{ letterSpacing: "0.4%" }}>Tons/Year</p>
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@ const AboutSection: React.FC = memo(() => {
                             </div>
                             <div className="flex flex-col items-start gap-[2px] sm:gap-[8px] font-poppins">
                                 <h3 className="text-xs sm:text-[40px] font-poppins font-bold text-brand leading-none">100+</h3>
-                                <p className="text-gray-600 font-medium text-[8px] sm:text-[16px]">Machines</p>
+                                <p className="text-gray-600 font-medium text-[8px] sm:text-[16px]" style={{ letterSpacing: "0.4%" }}>Machines</p>
                             </div>
                         </div>
                     </div>
