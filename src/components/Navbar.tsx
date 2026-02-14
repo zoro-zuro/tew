@@ -122,7 +122,7 @@ const Navbar: React.FC = memo(() => {
 
 
                             <div
-                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl transition-all duration-300 group-hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3)]"
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl transition-all duration-300 group-hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3)] before:content-[''] before:absolute before:-inset-[4px] before:rounded-[20px] before:hover:border-[4px] before:border-[#FE5200]/35"
                                 style={{
                                     width: '140px',
                                     height: '50px',

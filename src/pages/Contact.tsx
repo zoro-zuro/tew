@@ -226,9 +226,9 @@ const Contact = () => {
 
                                     </div>
                                     <div>
-                                        <h4 className="text-xs font-semibold text-gray-900 uppercase mb-1">Mail Us</h4>
-                                        <p className="text-sm text-gray-600">info@thirumolaang.com</p>
-                                        <p className="text-sm text-gray-600">thirumolaang@gmail.com</p>
+                                        <h4 className="font-montserrat font-extrabold text-[14px] leading-[145%] letter-spacing-[4%] text-[#FE5200]/80">Our Mail</h4>
+                                        <p className="font-poppins font-[600] text-[16px] leading-[145%] letter-spacing-[0%] text-[#2e2e2e]">info@thirumolaang.com</p>
+                                        <p className="font-poppins font-[600] text-[16px] leading-[145%] letter-spacing-[0%] text-[#2e2e2e]">thirumolaang@gmail.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -247,9 +247,9 @@ const Contact = () => {
 
                                     </div>
                                     <div>
-                                        <h4 className="text-xs font-semibold text-gray-900 uppercase mb-1">Our Phone</h4>
-                                        <p className="text-sm text-gray-600">+91 94400 20332</p>
-                                        <p className="text-sm text-gray-600">+91 86378 17507</p>
+                                        <h4 className="font-montserrat font-extrabold text-[14px] leading-[145%] letter-spacing-[4%] text-[#FE5200]/80">Our Phone</h4>
+                                        <p className="font-poppins font-[600] text-[16px] leading-[145%] letter-spacing-[0%] text-[#2e2e2e]">+91 94400 20332</p>
+                                        <p className="font-poppins font-[600] text-[16px] leading-[145%] letter-spacing-[0%] text-[#2e2e2e]">+91 86378 17507</p>
                                     </div>
                                 </div>
                             </div>
