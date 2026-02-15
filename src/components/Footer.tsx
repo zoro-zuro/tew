@@ -99,7 +99,7 @@ const Footer: React.FC = () => {
                                     <li key={item.name}>
                                         <a href={item.href} className="group flex items-center text-white/60 transition-all duration-300 text-[10px] font-poppins sm:text-[14px] whitespace-nowrap">
                                             <span className="w-2 h-2 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                                            <span className="transform group-hover:translate-x-1 transition-transform duration-300">{item.name}</span>
+                                            <span className="transform group-hover:translate-x-2 transition-transform duration-300">{item.name}</span>
                                         </a>
                                     </li>
                                 ))}
@@ -118,9 +118,9 @@ const Footer: React.FC = () => {
                                     { name: 'Contact Us', href: '#contact' }
                                 ].map((item) => (
                                     <li key={item.name}>
-                                        <a href={item.href} className="group flex items-center text-white/60 hover:text-brand transition-all duration-300 text-[10px] font-poppins sm:text-[14px] whitespace-nowrap">
+                                        <a href={item.href} className="group flex items-center text-white/60 transition-all duration-300 text-[10px] font-poppins sm:text-[14px] whitespace-nowrap">
                                             <span className="w-2 h-2 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                                            <span className="transform group-hover:translate-x-1 transition-transform duration-300">{item.name}</span>
+                                            <span className="transform group-hover:translate-x-2 transition-transform duration-300">{item.name}</span>
                                         </a>
                                     </li>
                                 ))}
@@ -139,9 +139,9 @@ const Footer: React.FC = () => {
                                     { name: 'Terms & Conditions', href: '#' }
                                 ].map((item) => (
                                     <li key={item.name}>
-                                        <a href={item.href} className="group flex items-center text-white/60 hover:text-brand transition-all duration-300 text-[10px] font-poppins sm:text-[14px] whitespace-nowrap">
+                                        <a href={item.href} className="group flex items-center text-white/60 transition-all duration-300 text-[10px] font-poppins sm:text-[14px] whitespace-nowrap">
                                             <span className="w-2 h-2 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                                            <span className="transform group-hover:translate-x-1 transition-transform duration-300">{item.name}</span>
+                                            <span className="transform group-hover:translate-x-2 transition-transform duration-300">{item.name}</span>
                                         </a>
                                     </li>
                                 ))}

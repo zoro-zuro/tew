@@ -5,9 +5,9 @@ const NextStepSection: React.FC = () => {
     return (
         <section className="bg-white pb-8 sm:pb-12 px-4 sm:px-6">
             <div
-                className="mx-auto bg-[#fff3ed]/30 rounded-[20px] sm:rounded-[26px] p-5 sm:p-[36px] flex flex-col md:flex-row items-center justify-between shadow-[0_6px_12px_0px_rgba(0,0,0,0.1)]
+                className="mx-auto max-w-[1095px] min-h-auto gap-[30px] md:gap-[160px] bg-[#fff3ed]/30 rounded-[20px] sm:rounded-[26px] p-5 sm:p-[36px] flex flex-col md:flex-row items-center justify-between shadow-[0_6px_12px_0px_rgba(0,0,0,0.1)]
 "
-                style={{ maxWidth: '1095px', minHeight: 'auto', gap: '160px' }}
+
             >
                 {/* Left Side Content */}
                 <div className="flex-1 space-y-3 sm:space-y-4 w-full">

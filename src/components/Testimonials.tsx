@@ -73,7 +73,13 @@ const Testimonials: React.FC = memo(() => {
     return (
         <SectionWrapper id="testimonials" className="bg-white overflow-hidden">
             <div className="felx flex-col items-center justify-center w-full inline-flex text-center mb-[26px] px-4">
-                <Badge title="Testimonials" />
+                <div className="mb-[12px] flex items-center gap-2 bg-brand/10 w-fit px-3 sm:px-[14px] py-[8px] rounded-full">
+                    <div className="relative w-2 h-2">
+                        <div className="absolute inset-0 rounded-full bg-brand" />
+                        <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
+                    </div>
+                    <span className={`text-black text-[10px] sm:text-xs font-medium uppercase`}>Testimonials</span>
+                </div>
                 <h2 className="heading">
                     Trusted by Leading Industrial Brands
                 </h2>

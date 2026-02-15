@@ -110,14 +110,13 @@ const ContactSection: React.FC = () => {
                                     Talk to our engineering team"
                                 </p>
                                 <button
-                                    className="w-full font-montserrat py-[12px] rounded-[16px] font-semibold text-[16px] text-white transition-all duration-300 hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.5),0px_8px_30px_0px_rgba(254,82,0,0.9),0px_0px_40px_0px_rgba(254,82,0,0.6)]"
+                                    className="relative w-full font-montserrat py-[12px] rounded-[16px] font-semibold text-[16px] text-white transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_4px_16px_0px_rgba(255,94,0,0.4)] hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] before:content-[''] before:absolute before:-inset-[4px] before:rounded-[20px] before:hover:border-[4px] before:border-[#FE5200]/35"
                                     style={{
                                         background: '#FE5200',
                                         border: '1px solid transparent',
                                         backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
                                         backgroundOrigin: 'border-box',
-                                        backgroundClip: 'padding-box, border-box',
-                                        boxShadow: '0px -11px 16px 0px #FFF3ED4D inset, 0px 4px 16px 0px #FF5E0080'
+                                        backgroundClip: 'padding-box, border-box'
                                     }}
                                 >
                                     Contact Us
@@ -127,8 +126,8 @@ const ContactSection: React.FC = () => {
                     </div>
 
                     {/* Right Column - Form */}
-                    <div className="w-full lg:w-[55%] space-y-4 sm:space-y-6">
-                        <form className="space-y-3 sm:space-y-5" onSubmit={(e) => e.preventDefault()}>
+                    <div className="w-full lg:w-[55%] space-y-3 sm:space-y-6">
+                        <form className="space-y-2.5 sm:space-y-5" onSubmit={(e) => e.preventDefault()}>
                             <div className="space-y-3 sm:space-y-5">
                                 {[
                                     { label: 'Company Name', placeholder: 'e.g., ABC Engineering Pvt. Ltd.' },
@@ -148,7 +147,7 @@ const ContactSection: React.FC = () => {
                                 ))}
                             </div>
 
-                            <div className="pt-2 sm:pt-4">
+                            <div className="pt-1 sm:pt-4">
                                 <button
                                     onClick={() => {
                                         if (formStatus === 'idle') {
@@ -189,19 +188,18 @@ const ContactSection: React.FC = () => {
                             </div>
 
                             {/* Contact Card - Mobile Only */}
-                            <div className="sm:hidden mt-16 mb-4 bg-primary/10 border border-primary/30 p-4 rounded-xl space-y-3">
+                            <div className="sm:hidden mt-6 mb-2 bg-primary/10 border border-primary/30 p-4 rounded-xl space-y-3">
                                 <p className="text-white/50 text-[10px] leading-relaxed">
                                     "Have questions? <span className="text-white/70">Talk to our team"</span>
                                 </p>
                                 <button
-                                    className="w-full py-2.5 rounded-lg font-semibold text-[10px] text-white transition-all duration-300"
+                                    className="relative w-full py-2.5 rounded-lg font-semibold text-[10px] text-white transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_2px_12px_0px_rgba(255,94,0,0.3)] hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] before:content-[''] before:absolute before:-inset-[4px] before:rounded-[20px] before:hover:border-[4px] before:border-[#FE5200]/35 active:scale-95"
                                     style={{
                                         background: '#FE5200',
                                         border: '1px solid transparent',
                                         backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
                                         backgroundOrigin: 'border-box',
-                                        backgroundClip: 'padding-box, border-box',
-                                        boxShadow: '0px -11px 16px 0px #FFF3ED4D inset, 0px 4px 16px 0px #FF5E0080'
+                                        backgroundClip: 'padding-box, border-box'
                                     }}
                                 >
                                     Contact Us

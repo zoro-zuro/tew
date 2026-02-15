@@ -41,12 +41,12 @@ const faqs = [
 
 const FAQItem = ({ question, answer, isOpen, onClick }: { question: string, answer: string, isOpen: boolean, onClick: () => void }) => {
     return (
-        <div className={`mb-3 sm:mb-[16px] border-[2px] border-black/10 rounded-[20px] ${isOpen ? 'shadow-md' : ''}`}>
+        <div className={`mb-2 sm:mb-[16px] border-[2px] border-black/10 rounded-[20px] ${isOpen ? 'shadow-md' : ''}`}>
             <button
                 onClick={onClick}
-                className="w-full shadow-sm px-4 sm:px-[20px] py-3 sm:py-[12px] flex items-center justify-between group transition-all hover:border-brand/20 text-left"
+                className="w-full shadow-sm px-3 sm:px-[20px] py-2 sm:py-[12px] flex items-center justify-between group transition-all hover:border-brand/20 text-left"
             >
-                <span className="text-[#1A1A1A] font-poppins font-bold sm:font-[700] line-height-700 text-xs sm:text-lg md:text-[20px]">
+                <span className="text-[#1A1A1A] font-poppins font-bold sm:font-[700] line-height-700 text-[11px] sm:text-lg md:text-[20px]">
                     {question}
                 </span>
 
@@ -86,7 +86,7 @@ const FAQSection: React.FC = () => {
 
     return (
         <SectionWrapper id="faq" className="bg-white relative">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-16">
 
                 {/* Left: FAQ List - Full width on mobile */}
                 <div className="lg:col-span-7 order-2 lg:order-1">

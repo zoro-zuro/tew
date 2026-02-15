@@ -1,8 +1,8 @@
-import React, { useState, useEffect, memo, useCallback } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 import hotForgedImg from '../assets/img/capablities/1.jpg';
 import machinedImg from '../assets/img/capablities/2.jpg';
 import customImg from '../assets/img/capablities/3.png';
@@ -38,6 +38,7 @@ const CapabilitiesSection: React.FC = memo(() => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [expandedIndex] = useState<number | null>(null);
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isMobileExpanded, setIsMobileExpanded] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -51,34 +52,28 @@ const CapabilitiesSection: React.FC = memo(() => {
 
     // Auto-play for mobile carousel
     useEffect(() => {
-        if (!isMobile) return;
+        if (!isMobile || isMobileExpanded) return;
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % capabilities.length);
         }, 5000); // Increased from 4000 to reduce CPU usage
         return () => clearInterval(interval);
-    }, [isMobile]);
+    }, [isMobile, isMobileExpanded]);
 
-    const nextSlide = useCallback(() => {
-        setCurrentSlide((prev) => (prev + 1) % capabilities.length);
-    }, []);
 
-    const prevSlide = useCallback(() => {
-        setCurrentSlide((prev) => (prev - 1 + capabilities.length) % capabilities.length);
-    }, []);
 
     const cap = capabilities[currentSlide];
 
     return (
-        <SectionWrapper id="capabilities" className="bg-white px-[94px] pb-0">
-            <div className="flex flex-col items-center text-center mb-[28px]">
+        <SectionWrapper id="capabilities" className="bg-white px-[44px] md:px-[94px] pb-0">
+            <div className="flex flex-col items-center text-center mb-4 sm:mb-[28px]">
                 <Badge title="Manufacturing Capabilities" />
-                <h2 className="font-montserrat text-lg sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1A1A1A]" style={{ lineHeight: "140%" }}>
+                <h2 className="font-montserrat text-[16px] sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1A1A1A]" style={{ lineHeight: "130%" }}>
                     Built for Industrial Scale
                 </h2>
             </div>
 
             {/* Mobile Carousel View - Optimized */}
-            <div className="sm:hidden relative max-w-[400px] mx-auto px-4">
+            <div className="sm:hidden relative max-w-[320px] px-4">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentSlide}
@@ -86,8 +81,9 @@ const CapabilitiesSection: React.FC = memo(() => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }} // Reduced duration
-                        className="relative h-[320px] rounded-[1.5rem] overflow-hidden will-change-transform"
+                        className="relative h-fit min-h-[420px] rounded-[1.5rem] overflow-hidden will-change-transform cursor-pointer"
                         style={{ transform: 'translateZ(0)' }}
+                        onClick={() => setIsMobileExpanded(!isMobileExpanded)}
                     >
                         <div className="absolute inset-0">
                             <img
@@ -102,41 +98,56 @@ const CapabilitiesSection: React.FC = memo(() => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
 
                         <div className="absolute inset-0 z-20 p-5 flex flex-col justify-end">
-                            <h3 className="font-montserrat text-[30px] font-[900] text-white mb-2">
+                            <h3 className="font-montserrat text-[22px] font-[900] text-white mb-1">
                                 {cap.title}
                             </h3>
-                            <p className="font-regular font-poppins text-[12px] text-white/60 leading-relaxed mb-3" style={{ lineHeight: "140%" }}>
-                                {cap.shortDesc}{" "}
-                                <span className="text-white">Read More</span>
-                            </p>
-                            <button
 
-                                className="w-full py-2.5 rounded-lg font-semibold text-xs"
+                            <motion.div
+                                initial={false}
+                                animate={{
+                                    height: isMobileExpanded ? 'auto' : '38px',
+                                    opacity: 1
+                                }}
+                                transition={{ duration: 0.4, ease: "easeOut" }}
+                                className="overflow-hidden"
                             >
-                                View Details
+                                <p className="font-regular font-poppins text-[12px] text-white/90 leading-relaxed mb-1">
+                                    {isMobileExpanded ? (
+                                        <span className="space-y-2 block">
+                                            <span className="block animate-fadeIn">{cap.fullDesc}</span>
+                                            <span className="block animate-fadeIn">{cap.fullDesc1}</span>
+                                        </span>
+                                    ) : (
+                                        <span className="line-clamp-2 text-white/70">
+                                            {cap.shortDesc}. <span className="text-white font-bold italic">Read More</span>
+                                        </span>
+                                    )}
+                                </p>
+                            </motion.div>
+
+                            <button
+                                className="w-full py-2.5 mt-3 rounded-lg font-semibold text-xs text-white"
+                                style={{
+                                    background: '#fe500073',
+                                    boxShadow: '0px -11px 16px 0px #FF5E00 inset, 0px 4px 16px 0px #FF5E0080'
+                                }}
+                            >
+                                {isMobileExpanded ? 'Close Details' : 'View Details'}
                             </button>
                         </div>
                     </motion.div>
                 </AnimatePresence>
 
-                <button
-                    onClick={prevSlide}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-lg z-30"
-                >
-                    <ChevronLeft size={18} className="text-black" />
-                </button>
-                <button
-                    onClick={nextSlide}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-lg z-30"
-                >
-                    <ChevronRight size={18} className="text-black" />
-                </button>
+                {/* Arrows Removed as per request */}
 
                 <div className="flex justify-center gap-2 mt-4">
                     {capabilities.map((_, idx) => (
                         <button
                             key={idx}
-                            onClick={() => setCurrentSlide(idx)}
+                            onClick={() => {
+                                setIsMobileExpanded(false);
+                                setCurrentSlide(idx);
+                            }}
                             className={`w-2 h-2 rounded-full transition-all ${idx === currentSlide ? 'bg-brand w-4' : 'bg-brand/30'
                                 }`}
                         />
@@ -152,7 +163,7 @@ const CapabilitiesSection: React.FC = memo(() => {
                         onMouseEnter={() => setHoveredIndex(index)}
                         onMouseLeave={() => setHoveredIndex(null)}
 
-                        className="relative h-[400px] sm:h-[500px] sm:rounded-[36px] overflow-hidden group cursor-pointer will-change-transform"
+                        className="relative h-[400px] sm:h-[540px] sm:rounded-[36px] overflow-hidden group cursor-pointer will-change-transform"
                         style={{ transform: 'translateZ(0)' }}
                     >
                         {/* Background Image with GPU acceleration */}
@@ -188,18 +199,19 @@ const CapabilitiesSection: React.FC = memo(() => {
                                     initial={false}
                                     animate={{
                                         height: (hoveredIndex === index || expandedIndex === index) ? 'auto' : '24px',
+                                        marginBottom: (hoveredIndex === index || expandedIndex === index) ? '70px' : '16px',
                                         opacity: 1
                                     }}
                                     transition={{ duration: 0.5, ease: "easeOut" }}
                                     className="mb-2 sm:mb-4"
                                 >
-                                    <p className={`font-normal text-xs sm:text-[12px] leading-relaxed transition-colors duration-500 ${(hoveredIndex === index || expandedIndex === index) ? 'text-white/90' : 'text-white/60'
+                                    <p className={`font-poppins font-[400] text-xs sm:text-[14px] leading-[140%] transition-colors duration-500 ${(hoveredIndex === index || expandedIndex === index) ? 'text-white/90' : 'text-white/60'
                                         }`}>
                                         {(hoveredIndex === index || expandedIndex === index) ? (
                                             <span>
 
                                                 <span className="block animate-fadeIn">{cap.fullDesc}</span>
-                                                <br />
+
                                                 <span className="block animate-fadeIn">{cap.fullDesc1}</span>
                                             </span>
                                         ) : (
