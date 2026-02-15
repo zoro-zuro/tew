@@ -7,7 +7,6 @@ import heroImg from '../assets/img/hero-img.png';
 import heroBgGif from '../assets/bg/hero-gif.gif';
 import heroCardLeft from '../assets/img/hero-card-left.png';
 import heroCardRight from '../assets/img/hero-card-right.png';
-import { title } from 'framer-motion/client';
 
 // Separate component for the interactive floating cards
 const InteractiveCard = ({ src, alt, className, rotation = 0 }: { src: string, alt: string, className: string, rotation?: number }) => {
