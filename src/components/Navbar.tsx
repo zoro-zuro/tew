@@ -56,7 +56,7 @@ const Navbar: React.FC = memo(() => {
                             border: "1px solid rgba(0, 0, 0, 0.1)"
                         }}>
                             <div className="flex items-center rounded-[28px] px-[26px] py-[12px] gap-[36px]" style={{
-                                background: isContactPage ? "rgba(18, 6, 0, 0.05)" : "#1a1a1a"
+                                background: isContactPage ? "rgba(18, 6, 0, 0.05)" : "#0a0a0a"
                             }}>
                                 {navItems.map((item, idx) => (
                                     <a
@@ -67,10 +67,10 @@ const Navbar: React.FC = memo(() => {
                                             handleNavClick(item.href);
                                         }}
                                         className={cn(
-                                            "text-[24px] font-[400] font-bebas transition-all relative px-[12px] py-[8px] letter-spacing-[14%]",
+                                            "text-[24px] font-[400] font-bebas transition-all relative px-[12px] py-[8px]",
                                             isContactPage
                                                 ? "text-black/40 hover:text-black/80"
-                                                : cn(idx === 0 ? "text-white/80" : "text-white/30", "hover:text-white/90")
+                                                : cn(idx === 0 ? "text-white/80" : "text-white/30", "hover:text-white/60")
                                         )}
                                         style={{ letterSpacing: "4%" }}
                                     >
