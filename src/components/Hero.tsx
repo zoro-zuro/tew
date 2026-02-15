@@ -168,7 +168,7 @@ const Hero: React.FC = memo(() => {
                     <InteractiveCard
                         src={heroCardLeft}
                         alt="ISO Certified Manufacturing"
-                        className="absolute left-[8%] sm:left-[6%] bottom-[8%] sm:bottom-[25%] pointer-events-auto z-20 w-[100px] sm:w-[140px] md:w-[160px] scale-[0.8] md:scale-100"
+                        className="absolute left-[8%] sm:left-[8%] bottom-[8%] sm:bottom-[25%] pointer-events-auto z-20 w-[100px] sm:w-[140px] md:w-[160px] scale-[0.8] md:scale-100"
                         rotation={-5}
                     />
                     <InteractiveCard
@@ -190,13 +190,13 @@ const Hero: React.FC = memo(() => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="font-montserrat max-w-[1200px] text-[16px] md:text-[47px] lg:text-[48px] font-extrabold text-white tracking-tight mb-2 md:mb-[12px] px-2 sm:px-6"
+                    className="font-montserrat max-w-[1200px] text-[16px] md:text-[47px] lg:text-[48px] font-extrabold text-white tracking-tight mb-2 md:mb-[12px] px-2 sm:px-6 pointer-events-auto"
                     style={{ lineHeight: "130%" }}
                 >
                     <div className="whitespace-nowrap">
                         Complete{' '}
-                        <span className="inline-flex items-center align-middle">
-                            <div className="relative w-[16px] md:w-[60px] lg:w-[42px] hover:w-[50px] md:hover:w-[74px] lg:hover:w-[74px] h-[16px] md:h-[60px] lg:h-[42px] mx-0.5 md:mx-1 transition-all duration-500 ease-in-out rounded-full">
+                        <span className="inline-flex items-center align-middle group cursor-default">
+                            <div className="relative w-[16px] md:w-[60px] lg:w-[42px] group-hover:w-[50px] md:group-hover:w-[74px] lg:group-hover:w-[74px] h-[16px] md:h-[60px] lg:h-[42px] mx-0.5 md:mx-1 transition-all duration-500 ease-in-out rounded-full">
                                 <img
                                     src={oGif}
                                     alt="O"

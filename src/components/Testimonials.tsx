@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { Quote } from 'lucide-react';
-import Badge from './common/Badge';
 
 const testimonials = [
     {
@@ -72,7 +71,7 @@ TestimonialCard.displayName = 'TestimonialCard';
 const Testimonials: React.FC = memo(() => {
     return (
         <SectionWrapper id="testimonials" className="bg-white overflow-hidden">
-            <div className="felx flex-col items-center justify-center w-full inline-flex text-center mb-[26px] px-4">
+            <div className="flex flex-col items-center justify-center w-full inline-flex text-center mb-[26px] px-4">
                 <div className="mb-[12px] flex items-center gap-2 bg-brand/10 w-fit px-3 sm:px-[14px] py-[8px] rounded-full">
                     <div className="relative w-2 h-2">
                         <div className="absolute inset-0 rounded-full bg-brand" />
