@@ -51,9 +51,9 @@ const Navbar: React.FC = memo(() => {
                         <div className="p-[1px] rounded-[30px] flex-shrink-0" style={{
                             background: isContactPage
                                 ? "rgba(18, 6, 0, 0.05)"
-                                : "linear-gradient(to bottom, #2e2e2e, rgba(254, 82, 0, 0.2))",
+                                : "linear-gradient(to bottom, rgba(254, 82, 0, 0.2), rgba(254, 82, 0, 0.4))",
                             backdropFilter: "blur(8px)",
-                            border: "1px solid rgba(0, 0, 0, 0.1)"
+                            // border: "1px solid rgba(0, 0, 0, 0.1)"
                         }}>
                             <div className="flex items-center rounded-[28px] px-[26px] py-[12px] gap-[36px]" style={{
                                 background: isContactPage ? "rgba(18, 6, 0, 0.05)" : "#0a0a0a"

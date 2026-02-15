@@ -7,7 +7,7 @@ import heroImg from '../assets/img/hero-img.png';
 import heroBgGif from '../assets/bg/hero-gif.gif';
 import heroCardLeft from '../assets/img/hero-card-left.png';
 import heroCardRight from '../assets/img/hero-card-right.png';
-import Badge from './common/Badge';
+import { title } from 'framer-motion/client';
 
 // Separate component for the interactive floating cards
 const InteractiveCard = ({ src, alt, className, rotation = 0 }: { src: string, alt: string, className: string, rotation?: number }) => {
@@ -183,7 +183,13 @@ const Hero: React.FC = memo(() => {
             {/* Hero Body Content */}
             <div className="relative z-10 md:w-full w-[95%] max-w-[1440px] flex flex-col items-center text-center px-4 sm:px-6 pt-20 sm:pt-[77px] pointer-events-none">
                 <div className="pointer-events-auto">
-                    <Badge title="#1 on OEM manufacturing" textColor='text-white' />
+                    <div className="mb-[12px] flex items-center gap-2 bg-[#FF5D1240] w-fit px-3 sm:px-[14px] py-[8px] rounded-full">
+                        <div className="relative w-2 h-2">
+                            <div className="absolute inset-0 rounded-full bg-brand" />
+                            <div className="absolute inset-0 rounded-full bg-brand animate-ripple" />
+                        </div>
+                        <span className={`text-white text-[10px] sm:text-xs font-medium `}>#1 on OEM manufacturing</span>
+                    </div>
                 </div>
 
                 <motion.h1
