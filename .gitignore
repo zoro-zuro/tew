@@ -11,6 +11,8 @@ node_modules
 opencode
 dist
 dist-ssr
+beastbuild
+figma-export
 *.local
 
 # Editor directories and files

@@ -126,12 +126,23 @@ const CapabilitiesSection: React.FC = memo(() => {
                             </motion.div>
 
                             <button
-                                className="w-full py-2.5 mt-3 rounded-lg font-semibold text-xs text-white"
+                                className="w-full py-2.5 mt-3 rounded-lg font-semibold text-xs text-white relative h-[42px] transition-all duration-300 hover:bg-[#8b2e0040]"
                                 style={{
                                     background: '#fe500073',
                                     boxShadow: '0px -11px 16px 0px #FF5E00 inset, 0px 4px 16px 0px #FF5E0080'
                                 }}
                             >
+                                <div
+                                    className="absolute inset-0 rounded-lg"
+                                    style={{
+                                        background: 'linear-gradient(180deg, #FFA880 0%, #FE5200 100%)',
+                                        padding: '1px',
+                                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                        WebkitMaskComposite: 'xor',
+                                        maskComposite: 'exclude',
+                                        pointerEvents: 'none',
+                                    }}
+                                />
                                 {isMobileExpanded ? 'Close Details' : 'View Details'}
                             </button>
                         </div>
@@ -224,16 +235,25 @@ const CapabilitiesSection: React.FC = memo(() => {
                             </div>
 
                             <button
-                                className="rounded-[16px] px-[16px] py-[12px] text-white font-medium transition-all hover:bg-[#fe500050]"
+                                className="rounded-[16px] px-[16px] py-[12px] text-white font-medium transition-all duration-300 relative overflow-hidden group/btn"
                                 style={{
-                                    background: '#fe500073',
-
-
-                                    backgroundOrigin: 'border-box',
-                                    backgroundClip: 'padding-box, border-box',
-                                    boxShadow: '0px -11px 16px 0px #FF5E00 inset, 0px 4px 16px 0px #FF5E0080'
+                                    background: hoveredIndex === index ? 'rgba(199, 69, 3, 0.45)' : '#fe500096',
+                                    boxShadow: hoveredIndex === index
+                                        ? '0px -16px 20px 0px #FF5E00 inset, 0px 6px 24px 0px #FF5E0095'
+                                        : '0px -20px 20px 0px #FF5E00 inset, 0px 6px 26px 0px #FF5E0080'
                                 }}
                             >
+                                <div
+                                    className="absolute inset-0 rounded-[16px]"
+                                    style={{
+                                        background: 'linear-gradient(180deg, #FFA880 0%, #FE5200 100%)',
+                                        padding: '1px',
+                                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                        WebkitMaskComposite: 'xor',
+                                        maskComposite: 'exclude',
+                                        pointerEvents: 'none',
+                                    }}
+                                />
                                 View Details
                             </button>
                         </div>

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { cn } from '../lib/utils';
 import { ChevronDown } from 'lucide-react';
 import Badge from './common/Badge';
+import { Link } from 'react-router-dom';
 
 const requirements = [
     { id: 'forging', label: 'Hot Forging Components' },
@@ -109,18 +110,21 @@ const ContactSection: React.FC = () => {
                                     "Have questions before submitting?<br />
                                     Talk to our engineering team"
                                 </p>
-                                <button
-                                    className="relative w-full font-montserrat py-[12px] rounded-[16px] font-semibold text-[16px] text-white transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_4px_16px_0px_rgba(255,94,0,0.4)] hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] before:content-[''] before:absolute before:-inset-[4px] before:rounded-[20px] before:hover:border-[4px] before:border-[#FE5200]/35"
-                                    style={{
-                                        background: '#FE5200',
-                                        border: '1px solid transparent',
-                                        backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
-                                        backgroundOrigin: 'border-box',
-                                        backgroundClip: 'padding-box, border-box'
-                                    }}
-                                >
-                                    Contact Us
-                                </button>
+                                <Link to="/contact">
+                                    <button
+                                        className="relative w-full font-montserrat py-[12px] rounded-[16px] font-semibold text-[16px] text-white transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_4px_16px_0px_rgba(255,94,0,0.4)] hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] before:content-[''] before:absolute before:-inset-[4px] before:rounded-[20px] before:hover:border-[4px] before:border-[#FE5200]/35"
+                                        style={{
+                                            background: '#FE5200',
+                                            border: '1px solid transparent',
+                                            backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                            backgroundOrigin: 'border-box',
+                                            backgroundClip: 'padding-box, border-box'
+                                        }}
+                                    >
+                                        Contact Us
+                                    </button>
+                                </Link>
+
                             </div>
                         </div>
                     </div>
