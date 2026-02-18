@@ -6,7 +6,12 @@ import instaIcon from '../assets/img/social_media_icons/instagram.png';
 import linkedinIcon from '../assets/img/social_media_icons/linkedin.png';
 import whatsappIcon from '../assets/img/social_media_icons/whatsapp.png';
 import youtubeIcon from '../assets/img/social_media_icons/youtube.png';
+import { useMutation } from 'convex/react';
+import { api } from '../../convex/_generated/api';
+
 const Contact = () => {
+    const saveContact = useMutation(api.contacts.saveContact);
+    const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
     const [formData, setFormData] = useState({
         fullName: '',
@@ -18,6 +23,32 @@ const Contact = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (status === 'submitting') return;
+
+        setStatus('submitting');
+        try {
+            await saveContact({
+                ...formData,
+                source: 'contact_page'
+            });
+            setStatus('success');
+            setFormData({
+                fullName: '',
+                companyName: '',
+                businessEmail: '',
+                phoneNumber: '',
+                message: ''
+            });
+            setTimeout(() => setStatus('idle'), 5000);
+        } catch (error) {
+            console.error('Failed to send message:', error);
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 5000);
+        }
     };
 
     return (
@@ -37,7 +68,7 @@ const Contact = () => {
                     </h1>
                 </div>
 
-                <form className="space-y-6 sm:space-y-[36px] px-2 sm:px-[40px]">
+                <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-[36px] px-2 sm:px-[40px]">
                     <div className='flex flex-col gap-[8px]'>
                         <label className="label-text">
                             Full Name
@@ -45,6 +76,7 @@ const Contact = () => {
                         <input
                             type="text"
                             name="fullName"
+                            required
                             value={formData.fullName}
                             onChange={handleInputChange}
                             placeholder="Enter your full name"
@@ -73,6 +105,7 @@ const Contact = () => {
                         <input
                             type="email"
                             name="businessEmail"
+                            required
                             value={formData.businessEmail}
                             onChange={handleInputChange}
                             placeholder="Enter your business email"
@@ -87,6 +120,7 @@ const Contact = () => {
                         <input
                             type="tel"
                             name="phoneNumber"
+                            required
                             value={formData.phoneNumber}
                             onChange={handleInputChange}
                             placeholder="Enter your contact number"
@@ -111,10 +145,12 @@ const Contact = () => {
 
                     <div className="flex flex-col items-center gap-[8px]">
                         <p className="font-poppins text-[12px] text-[#2e2e2e]/60 font-bold" style={{ lineHeight: "145%", letterSpacing: "1%" }}>
-                            You'll receive a response in your inbox instantly.
+                            {status === 'success' ? 'Message sent successfully!' : status === 'error' ? 'Something went wrong. Please try again.' : "You'll receive a response in your inbox instantly."}
                         </p>
                         <button
-                            className="w-full py-2 px-4 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-[10px] sm:text-base text-white transition duration-300  ease-in-out "
+                            type="submit"
+                            disabled={status === 'submitting'}
+                            className="w-full py-2 px-4 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-[10px] sm:text-base text-white transition duration-300  ease-in-out disabled:opacity-50"
                             style={{
                                 background: '#FE5200',
                                 border: '1px solid transparent',
@@ -124,8 +160,7 @@ const Contact = () => {
                                 boxShadow: '0px -11px 16px 0px #FFF3ED4D inset'
                             }}
                         >
-
-                            Send Your Queries
+                            {status === 'submitting' ? 'Sending...' : status === 'success' ? 'Message Sent' : 'Send Your Queries'}
                         </button>
                     </div>
 

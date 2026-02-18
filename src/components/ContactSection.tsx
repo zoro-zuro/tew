@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import SectionWrapper from './common/SectionWrapper';
 import { motion } from 'framer-motion';
-
 import { cn } from '../lib/utils';
 import { ChevronDown } from 'lucide-react';
 import Badge from './common/Badge';
 import { Link } from 'react-router-dom';
+import { useMutation } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 
 const requirements = [
     { id: 'forging', label: 'Hot Forging Components' },
@@ -14,9 +15,49 @@ const requirements = [
 ];
 
 const ContactSection: React.FC = () => {
+    const saveContact = useMutation(api.contacts.saveContact);
     const [selectedReq, setSelectedReq] = useState('forging');
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+    const [formData, setFormData] = useState({
+        companyName: '',
+        fullName: '',
+        businessEmail: '',
+        phoneNumber: '',
+        location: ''
+    });
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (formStatus === 'submitting') return;
+
+        setFormStatus('submitting');
+        try {
+            await saveContact({
+                ...formData,
+                requirement: requirements.find(r => r.id === selectedReq)?.label,
+                source: 'contact_section'
+            });
+            setFormStatus('success');
+            setFormData({
+                companyName: '',
+                fullName: '',
+                businessEmail: '',
+                phoneNumber: '',
+                location: ''
+            });
+            setTimeout(() => setFormStatus('idle'), 5000);
+        } catch (error) {
+            console.error('Failed to send quote request:', error);
+            setFormStatus('error');
+            setTimeout(() => setFormStatus('idle'), 5000);
+        }
+    };
 
     const selectedLabel = requirements.find(r => r.id === selectedReq)?.label || '';
 
@@ -75,6 +116,7 @@ const ContactSection: React.FC = () => {
                                 <div className="relative">
                                     <label className="text-white text-[10px] mb-1 block">Select Type</label>
                                     <button
+                                        type="button"
                                         onClick={() => setDropdownOpen(!dropdownOpen)}
                                         className="w-full flex items-center justify-between bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-xs"
                                     >
@@ -86,6 +128,7 @@ const ContactSection: React.FC = () => {
                                             {requirements.map((req) => (
                                                 <button
                                                     key={req.id}
+                                                    type="button"
                                                     onClick={() => {
                                                         setSelectedReq(req.id);
                                                         setDropdownOpen(false);
@@ -105,13 +148,14 @@ const ContactSection: React.FC = () => {
 
                         {/* Contact Card - Desktop Only */}
                         <div className="hidden sm:block justify-self-end">
-                            <div className=" border border-primary/10 p-[16px] rounded-[16px] w-fit space-y-[16px]" style={{ background: "#FF5E000D", }}>
+                            <div className="flex flex-col border border-primary/10 p-[16px] rounded-[16px] w-fit gap-[16px]" style={{ background: "#FF5E000D", }}>
                                 <p className="font-poppins font-medium text-white/60 text-[14px]" style={{ lineHeight: "170%" }}>
                                     "Have questions before submitting?<br />
                                     Talk to our engineering team"
                                 </p>
                                 <Link to="/contact">
                                     <button
+                                        type="button"
                                         className="relative w-full font-montserrat py-[12px] rounded-[16px] font-semibold text-[16px] text-white transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_4px_16px_0px_rgba(255,94,0,0.4)] hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] before:content-[''] before:absolute before:-inset-[4px] before:rounded-[20px] before:hover:border-[4px] before:border-[#FE5200]/35"
                                         style={{
                                             background: '#FE5200',
@@ -131,47 +175,42 @@ const ContactSection: React.FC = () => {
 
                     {/* Right Column - Form */}
                     <div className="w-full lg:w-[55%] space-y-3 sm:space-y-6">
-                        <form className="space-y-2.5 sm:space-y-5" onSubmit={(e) => e.preventDefault()}>
-                            <div className="space-y-3 sm:space-y-5">
+                        <form className="space-y-2.5 sm:space-y-5" onSubmit={handleSubmit}>
+                            <div className="space-y-3 sm:space-y-4">
                                 {[
-                                    { label: 'Company Name', placeholder: 'e.g., ABC Engineering Pvt. Ltd.' },
-                                    { label: 'Full Name', placeholder: 'e.g., Ramesh Kumar' },
-                                    { label: 'Business Email', placeholder: 'e.g., ramesh@company.com' },
-                                    { label: 'Phone Number', placeholder: 'e.g., 9876543210' },
-                                    { label: 'Enter City / State / Country', placeholder: 'e.g., Chennai, Tamil Nadu, India' }
+                                    { label: 'Company Name', name: 'companyName', placeholder: 'e.g., ABC Engineering Pvt. Ltd.' },
+                                    { label: 'Full Name', name: 'fullName', placeholder: 'e.g., Ramesh Kumar' },
+                                    { label: 'Business Email', name: 'businessEmail', placeholder: 'e.g., ramesh@company.com', type: 'email' },
+                                    { label: 'Phone Number', name: 'phoneNumber', placeholder: 'e.g., 9876543210', type: 'tel' },
+                                    { label: 'Enter City / State / Country', name: 'location', placeholder: 'e.g., Chennai, Tamil Nadu, India' }
                                 ].map((field) => (
-                                    <div key={field.label} className="space-y-1 sm:space-y-2">
-                                        <label className="text-white/90 text-[10px] sm:text-sm font-medium">{field.label}</label>
+                                    <div key={field.name} className="space-y-1 sm:space-y-1.5">
+                                        <label className="text-white/90 text-[10px] sm:text-xs font-medium uppercase tracking-wider">{field.label}</label>
                                         <input
-                                            type="text"
+                                            type={field.type || 'text'}
+                                            name={field.name}
+                                            required
+                                            value={(formData as any)[field.name]}
+                                            onChange={handleInputChange}
                                             placeholder={field.placeholder}
-                                            className="w-full bg-transparent border border-white/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-white text-xs sm:text-sm placeholder:text-white/30 focus:outline-none focus:border-brand/50 transition-colors"
+                                            className="w-full bg-white/5 border border-white/10 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-white text-xs sm:text-sm placeholder:text-white/20 focus:outline-none focus:border-brand/40 transition-all"
                                         />
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="pt-1 sm:pt-4">
+                            <div className="pt-2 sm:pt-4">
                                 <button
-                                    onClick={() => {
-                                        if (formStatus === 'idle') {
-                                            setFormStatus('submitting');
-                                            setTimeout(() => {
-                                                setFormStatus('success');
-                                                setTimeout(() => {
-                                                    setFormStatus('idle');
-                                                }, 3000);
-                                            }, 2000);
-                                        }
-                                    }}
-                                    className="w-full py-2 px-4 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-[10px] sm:text-base text-white transition-all duration-300"
+                                    type="submit"
+                                    disabled={formStatus === 'submitting'}
+                                    className="w-full py-2.5 px-4 sm:py-3.5 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-[18px] font-montserrat font-extrabold leading-[145%] tracking-widest text-white transition-all duration-300 disabled:opacity-50"
                                     style={{
-                                        background: formStatus === 'success' ? '#22c55e' : '#FE5200',
+                                        background: '#FE5200',
                                         border: '1px solid transparent',
-                                        backgroundImage: formStatus === 'success' ? 'none' : `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                        backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
                                         backgroundOrigin: 'border-box',
                                         backgroundClip: 'padding-box, border-box',
-                                        boxShadow: formStatus === 'success' ? 'none' : '0px -11px 16px 0px #FFF3ED4D inset'
+                                        boxShadow: '0px -11px 16px 0px #FFF3ED4D inset'
                                     }}
                                 >
                                     {formStatus === 'idle' && "Get Your Quotation Now"}
@@ -187,7 +226,8 @@ const ContactSection: React.FC = () => {
                                             ))}
                                         </div>
                                     )}
-                                    {formStatus === 'success' && "Check the inbox"}
+                                    {formStatus === 'success' && "Sent Successfully!"}
+                                    {formStatus === 'error' && "Error! Try Again"}
                                 </button>
                             </div>
 
@@ -196,18 +236,21 @@ const ContactSection: React.FC = () => {
                                 <p className="text-white/50 text-[10px] leading-relaxed">
                                     "Have questions? <span className="text-white/70">Talk to our team"</span>
                                 </p>
-                                <button
-                                    className="relative w-full py-2.5 rounded-lg font-semibold text-[10px] text-white transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_2px_12px_0px_rgba(255,94,0,0.3)] hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] before:content-[''] before:absolute before:-inset-[4px] before:rounded-[20px] before:hover:border-[4px] before:border-[#FE5200]/35 active:scale-95"
-                                    style={{
-                                        background: '#FE5200',
-                                        border: '1px solid transparent',
-                                        backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
-                                        backgroundOrigin: 'border-box',
-                                        backgroundClip: 'padding-box, border-box'
-                                    }}
-                                >
-                                    Contact Us
-                                </button>
+                                <Link to="/contact">
+                                    <button
+                                        type="button"
+                                        className="relative w-full py-2.5 rounded-lg font-semibold text-[10px] text-white transition-all duration-300 shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_2px_12px_0px_rgba(255,94,0,0.3)] hover:shadow-[inset_0px_-11px_16px_0px_rgba(255,243,237,0.3),0px_5px_20px_0px_rgba(254,82,0,0.6)] before:content-[''] before:absolute before:-inset-[4px] before:rounded-[20px] before:hover:border-[4px] before:border-[#FE5200]/35 active:scale-95"
+                                        style={{
+                                            background: '#FE5200',
+                                            border: '1px solid transparent',
+                                            backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                            backgroundOrigin: 'border-box',
+                                            backgroundClip: 'padding-box, border-box'
+                                        }}
+                                    >
+                                        Contact Us
+                                    </button>
+                                </Link>
                             </div>
                         </form>
                     </div>
