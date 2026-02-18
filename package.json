@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "serve": "nodemon --exec vite",
-    "build": "npx convex deploy --recursive && tsc -b && vite build",
+    "build": "npx convex deploy && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
