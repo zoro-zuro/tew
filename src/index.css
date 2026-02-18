@@ -400,3 +400,16 @@
   position: relative;
   z-index: 1;
 }
+
+/* Custom Utilities */
+.custom-scrollbar-hidden {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.custom-scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}

@@ -13,4 +13,7 @@ export default defineSchema({
         source: v.string(),
         createdAt: v.number(),
     }),
+    adminSettings: defineTable({
+        key: v.string(),
+    }),
 });
