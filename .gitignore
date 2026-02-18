@@ -13,6 +13,8 @@ dist
 dist-ssr
 beastbuild
 figma-export
+frontend-beast.md
+api-usage.json
 *.local
 
 # Editor directories and files
