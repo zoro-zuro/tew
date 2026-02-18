@@ -5,6 +5,10 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Optional: Ensure the Convex URL is correctly handled if passed as an env var
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 [[plugins]]
   package = "@netlify/plugin-lighthouse"

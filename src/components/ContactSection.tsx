@@ -204,11 +204,10 @@ const ContactSection: React.FC = () => {
                                     type="submit"
                                     disabled={formStatus === 'submitting'}
                                     className={cn(
-                                        "relative w-full py-2.5 px-4 sm:py-3.5 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-[18px] font-montserrat font-extrabold leading-[145%] tracking-widest text-white transition-all duration-300 disabled:opacity-50",
-                                        "before:content-[''] before:absolute before:-inset-[4px] before:rounded-[12px] sm:before:rounded-[16px] before:transition-all before:duration-300 before:hover:border-[4px]",
+                                        "w-full py-2.5 px-4 sm:py-3.5 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-[18px] font-montserrat font-extrabold leading-[145%] tracking-widest text-white transition-all duration-300 disabled:opacity-50",
                                         formStatus === 'success'
-                                            ? "before:border-[#22c55e]/35 shadow-[0px_4px_16px_0px_rgba(34,197,94,0.4)]"
-                                            : "before:border-[#FE5200]/35 shadow-[0px_4px_16px_0px_rgba(255,94,0,0.4)]"
+                                            ? "shadow-[0px_4px_16px_0px_rgba(34,197,94,0.4)]"
+                                            : "shadow-[0px_4px_16px_0px_rgba(255,94,0,0.4)]"
                                     )}
                                     style={{
                                         background: formStatus === 'success' ? '#22c55e' : '#FE5200',
