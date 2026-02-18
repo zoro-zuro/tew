@@ -43,8 +43,8 @@ const AdminPortal = () => {
 
     if (!isAuthorized) {
         return (
-            <SectionWrapper id="admin-login" className="bg-black min-h-screen flex items-center justify-center">
-                <div className="w-full max-w-[440px] px-6">
+            <SectionWrapper id="admin-login" className="bg-black min-h-screen flex items-center justify-center p-0">
+                <div className="w-full h-screen flex items-center justify-center  px-6">
                     <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 sm:p-12 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand to-transparent opacity-50" />
 
@@ -100,7 +100,7 @@ const AdminPortal = () => {
     }
 
     return (
-        <SectionWrapper id="admin" className="bg-[#fcfcfc] min-h-screen font-poppins">
+        <SectionWrapper id="admin" className="bg-[#fcfcfc] min-h-screen font-poppins py-0">
             <div className="max-w-[1400px] mx-auto pt-10 pb-20 px-6">
                 <div className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6">
                     <div className="flex flex-col items-center sm:items-start">
@@ -176,8 +176,8 @@ const AdminPortal = () => {
                                             </td>
                                             <td className="px-6 py-5">
                                                 <span className={`text-[9px] px-2.5 py-1 rounded-full font-black uppercase tracking-widest border ${contact.source === 'contact_page'
-                                                        ? 'bg-blue-50 text-blue-600 border-blue-100'
-                                                        : 'bg-orange-50 text-orange-600 border-orange-100'
+                                                    ? 'bg-blue-50 text-blue-600 border-blue-100'
+                                                    : 'bg-orange-50 text-orange-600 border-orange-100'
                                                     }`}>
                                                     {contact.source.replace('_', ' ')}
                                                 </span>

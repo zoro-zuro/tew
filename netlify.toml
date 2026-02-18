@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Optional: Ensure the Convex URL is correctly handled if passed as an env var
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"

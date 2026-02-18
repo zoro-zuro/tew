@@ -203,14 +203,24 @@ const ContactSection: React.FC = () => {
                                 <button
                                     type="submit"
                                     disabled={formStatus === 'submitting'}
-                                    className="w-full py-2.5 px-4 sm:py-3.5 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-[18px] font-montserrat font-extrabold leading-[145%] tracking-widest text-white transition-all duration-300 disabled:opacity-50"
+                                    className={cn(
+                                        "relative w-full py-2.5 px-4 sm:py-3.5 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-[18px] font-montserrat font-extrabold leading-[145%] tracking-widest text-white transition-all duration-300 disabled:opacity-50",
+                                        "before:content-[''] before:absolute before:-inset-[4px] before:rounded-[12px] sm:before:rounded-[16px] before:transition-all before:duration-300 before:hover:border-[4px]",
+                                        formStatus === 'success'
+                                            ? "before:border-[#22c55e]/35 shadow-[0px_4px_16px_0px_rgba(34,197,94,0.4)]"
+                                            : "before:border-[#FE5200]/35 shadow-[0px_4px_16px_0px_rgba(255,94,0,0.4)]"
+                                    )}
                                     style={{
-                                        background: '#FE5200',
+                                        background: formStatus === 'success' ? '#22c55e' : '#FE5200',
                                         border: '1px solid transparent',
-                                        backgroundImage: `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
+                                        backgroundImage: formStatus === 'success'
+                                            ? 'linear-gradient(#22c55e, #22c55e), linear-gradient(180deg, #86efac 0%, #22c55e 100%)'
+                                            : `linear-gradient(#FE5200, #FE5200), linear-gradient(180deg, #FFA880 0%, #FE5200 100%)`,
                                         backgroundOrigin: 'border-box',
                                         backgroundClip: 'padding-box, border-box',
-                                        boxShadow: '0px -11px 16px 0px #FFF3ED4D inset'
+                                        boxShadow: formStatus === 'success'
+                                            ? 'inset 0px -11px 16px 0px rgba(134, 239, 172, 0.3)'
+                                            : 'inset 0px -11px 16px 0px rgba(255, 243, 237, 0.3)'
                                     }}
                                 >
                                     {formStatus === 'idle' && "Get Your Quotation Now"}
@@ -226,7 +236,7 @@ const ContactSection: React.FC = () => {
                                             ))}
                                         </div>
                                     )}
-                                    {formStatus === 'success' && "Sent Successfully!"}
+                                    {formStatus === 'success' && "Check Your Inbox"}
                                     {formStatus === 'error' && "Error! Try Again"}
                                 </button>
                             </div>
