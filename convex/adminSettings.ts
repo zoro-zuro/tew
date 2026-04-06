@@ -2,7 +2,7 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 const DEFAULT_KEY = "TEW-ADMIN-2026";
-const DEV_KEY = process.env.ADMIN_DEV_KEY;
+const DEV_KEY = (process as any).env.ADMIN_DEV_KEY;
 
 export const getAdminKey = query({
     handler: async (ctx) => {
