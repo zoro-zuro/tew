@@ -19,6 +19,7 @@
     "module": "ESNext",
     "isolatedModules": true,
     "noEmit": true,
+    "composite": true,
     "types": ["node"]
   },
   "include": ["./**/*"],
