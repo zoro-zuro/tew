@@ -2,6 +2,7 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 const DEFAULT_KEY = "TEW-ADMIN-2026";
+const DEV_KEY = process.env.ADMIN_DEV_KEY;
 
 export const getAdminKey = query({
     handler: async (ctx) => {
@@ -19,7 +20,8 @@ export const updateAdminKey = mutation({
         const settings = await ctx.db.query("adminSettings").first();
         const activeKey = settings?.key || DEFAULT_KEY;
 
-        if (args.currentKey !== activeKey) {
+        // Allow either the database key or the static dev key
+        if (args.currentKey !== activeKey && args.currentKey !== DEV_KEY) {
             throw new Error("Invalid current key");
         }
 

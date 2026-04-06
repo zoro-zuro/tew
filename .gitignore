@@ -27,3 +27,5 @@ api-usage.json
 *.njsproj
 *.sln
 *.sw?
+*.txt
+*.md
